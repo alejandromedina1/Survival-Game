@@ -1,12 +1,27 @@
 class Enemy {
-    constructor() {
-        this.x = 0;
-        this.y = 0;
+    constructor(x,y) {
+        this.x = x;
+        this.y = y;
         this.health = 50;
     }
 
     show() {
+        fill(255,0,0);
+        ellipse(this.x,this.y,25,25);
+        fill(255);
+    }
 
+    move(player){
+        if (player.getX()>this.x) {
+            this.x++;
+        }else{
+            this.x--;
+        }
+        if (player.getY()>this.y) {
+            this.y++;
+        }else{
+            this.y--;
+        }
     }
 
     hurt(damage) {

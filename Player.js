@@ -1,9 +1,9 @@
 class Player {
-    constructor() {
-        this.dirX = 0;
-        this.dirY = 0;
-        this.x = 600 + this.dirX;
-        this.y = 200 + this.dirY;
+    constructor(column, row) {
+        this.row = row;
+        this.column = column;
+        this.x = (column * 50)+25;
+        this.y = (row * 50)+25;
         this.inventory = [];
     }
 
@@ -11,32 +11,33 @@ class Player {
         fill(0, 0, 255);
         ellipse(this.x, this.y, 50, 50)
         this.move();
+        fill(255);
     }
 
-    move(key) {
+    move(mapReference, key) {
         switch (key) {
             case 'a':
-                if (condition) {
-                    
+                if (this.column-1 >= 0 && mapReference[this.row][this.column-1] === 0) {
+                    this.column--;
                 }
-                this.dirX = -5;
-                this.dirY = 0;
                 break;
             case 'd':
-                this.dirX = +5;
-                this.dirY = 0;
+                if (this.column+1 < 24 && mapReference[this.row][this.column+1] === 0) {
+                    this.column++;
+                }
                 break;
             case 'w':
-                this.dirY = -5;
-                this.dirX = 0;
+                if (this.row-1 > 0 && mapReference[this.row-1][this.column] === 0) {
+                    this.row--;
+                }
                 break;
             case 's':
-                this.dirY = +5;
-                this.dirX = 0;
+                if (this.row+1 < 14 && mapReference[this.row+1][this.column] === 0) {
+                    this.row++;
+                }
                 break;
             case 'x':
-                this.dirY = 0;
-                this.dirX = 0;
+
                 break;
 
             default:
@@ -46,7 +47,13 @@ class Player {
     }
 
     updateCoords() {
-        this.x = this.x + this.dirX;
-        this.y = this.y + this.dirY;
+        this.x=(this.column *50) +25;
+        this.y=(this.row*50)+25;
+    }
+    getX() {
+        return this.x;
+    }
+    getY() {
+        return this.y;
     }
 }
