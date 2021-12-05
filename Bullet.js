@@ -4,8 +4,15 @@ class Bullet {
         this.y = y;
         this.activate = true;
     }
-    show() {
 
+    show() {
+        fill(0, 255, 0);
+        circle(this.x, this.y, 5);
+        fill(255);
+        this.move();
+    }
+    move() {
+        this.x++;
     }
     deactivate() {
         this.activate = false;

@@ -16,6 +16,7 @@ class Map {
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         ];
+        this.rifle = new Weapon(5, 10);
     }
 
     show() {
@@ -29,11 +30,17 @@ class Map {
                 rect(column * 50, row * 50, 50, 50);
             }
         }
+        if (this.rifle !== null) {
+            this.rifle.show()
+        }
     }
-
     getGround() {
         return this.ground;
     }
-
-
+    getRifle() {
+        return this.rifle;
+    }
+    freeRifle() {
+        this.rifle = null;
+    }
 }
