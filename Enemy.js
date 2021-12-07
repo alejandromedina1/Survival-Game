@@ -37,4 +37,8 @@ class Enemy {
     getY() {
         return this.y;
     }
+
+    getHealth() {
+        return this.health;
+    }
 }

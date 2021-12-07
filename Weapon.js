@@ -25,7 +25,7 @@ class Weapon {
     }
 
     shoot() {
-        let nBullet = new Bullet(this.x, this.y);
+        let nBullet = new Bullet(this.x,this.y);
         this.ammo.push(nBullet);
     }
 

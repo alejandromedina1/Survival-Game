@@ -20,9 +20,6 @@ class Bullet {
     getActive() {
         return this.activate;
     }
-    move() {
-        this.x++;
-    }
     getX() {
         return this.x;
     }
