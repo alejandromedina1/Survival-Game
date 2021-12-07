@@ -26,6 +26,19 @@ class Enemy {
         }
     }
 
+    hitBox(player){
+        let rifleReference = player.getRifle();
+        if (rifleReference !== null) {
+            let bullets = rifleReference.getAmmo();
+            bullets.forEach(bullet => {
+                if (bullet.getActive() && dist(this.x,this.y,bullet.getX(),bullet.getY())<=30) {
+                    console.log("pew pew");
+                    this.hurt(10);
+                }
+            });
+        }
+    }
+
     hurt(damage) {
         this.health -= damage;
     }

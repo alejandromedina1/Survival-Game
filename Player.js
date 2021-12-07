@@ -88,6 +88,18 @@ class Player {
         return this.x;
     }
 
+    hitBox(enemy){
+        for (let i = 0; i < enemy.length; i++) {
+            if (dist(this.x,this.y,enemy[i].getX(),enemy[i].getY())<30) {
+                this.hurt(1);
+                if (this.health <=0) {
+                    console.log("GAME OVER");
+                }
+            }
+            
+        }
+    }
+
     getY() {
         return this.y;
     }

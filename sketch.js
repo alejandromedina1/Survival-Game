@@ -23,35 +23,15 @@ function draw() {
       player.shoot();
     }
   }
-  enemyHitBox();
-  playerHitBox();
+  enemyDie();
+  player.hitBox(horde);
 }
 
-function enemyHitBox() {
+function enemyDie(){
   for (let i = 0; i < horde.length; i++) {
-    let rifleReference = player.getRifle();
-    if (rifleReference !== null) {
-      let bullets = rifleReference.getAmmo();
-      bullets.forEach(bullet => {
-        if (bullet.getActive() && dist(horde[i].getX(), horde[i].getY(), bullet.getX(), bullet.getY()) < 10) {
-          horde[i].hurt(10);
-          bullet.deactivate();
-          if (horde[i].getHealth() <= 0) {
-            horde.splice(i,1);
-          }
-        }
-      });
-    }
-  }
-}
-
-function playerHitBox(){
-  for (let i = 0; i < horde.length; i++) {
-    if (dist(player.getX(),player.getY(), horde[i].getX(), horde[i].getY())<45) {
-      player.hurt(1);
-      if (player.getHealth()<=0) {
-        console.log("GAME OVER");
-      }
+    horde[i].hitBox(player);
+    if (horde[i]!== undefined && horde[i].getHealth()<=0) {
+       horde.splice(i,1);
     }
   }
 }
@@ -64,6 +44,7 @@ function takeWeapon() {
     }
   }
 }
+
 
 function keyPressed() {
   player.move(map.getGround(), key);
