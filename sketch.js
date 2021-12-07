@@ -24,6 +24,7 @@ function draw() {
     }
   }
   enemyHitBox();
+  playerHitBox();
 }
 
 function enemyHitBox() {
@@ -35,8 +36,22 @@ function enemyHitBox() {
         if (bullet.getActive() && dist(horde[i].getX(), horde[i].getY(), bullet.getX(), bullet.getY()) < 10) {
           horde[i].hurt(10);
           bullet.deactivate();
+          if (horde[i].getHealth() <= 0) {
+            horde.splice(i,1);
+          }
         }
       });
+    }
+  }
+}
+
+function playerHitBox(){
+  for (let i = 0; i < horde.length; i++) {
+    if (dist(player.getX(),player.getY(), horde[i].getX(), horde[i].getY())<45) {
+      player.hurt(1);
+      if (player.getHealth()<=0) {
+        console.log("GAME OVER");
+      }
     }
   }
 }

@@ -5,6 +5,7 @@ class Player {
         this.x = (column * 50) + 25;
         this.y = (row * 50) + 25;
         this.inventory = [];
+        this.health = 100;
     }
     show() {
         fill(0, 0, 255);
@@ -18,6 +19,9 @@ class Player {
             this.inventory[0].show();
         }
         rectMode(CORNER);
+        fill(0);
+        text(this.health, this.x-10, this.y - 30);
+        fill(255);
     }
 
     takeRifle() {
@@ -97,5 +101,11 @@ class Player {
             return this.inventory[0]
         }
         return null;
+    }
+    hurt(damage){
+        this.health -=damage;
+    }
+    getHealth() {
+        return this.health;
     }
 }
