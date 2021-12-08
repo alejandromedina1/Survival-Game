@@ -18,11 +18,13 @@ function draw() {
   });
   player.show();
   takeWeapon();
-  if (mouseIsPressed) {
+  /*if (mouseIsPressed) {
     if (mouseButton === LEFT) {
       player.shoot();
     }
   }
+  */
+ player.shoot();
   enemyDie();
   player.hitBox(horde);
 }

@@ -20,7 +20,7 @@ class Player {
         }
         rectMode(CORNER);
         fill(0);
-        text(this.health, this.x-10, this.y - 30);
+        text(this.health, this.x - 10, this.y - 30);
         fill(255);
     }
 
@@ -36,8 +36,13 @@ class Player {
 
     shoot() {
         if (this.takeRifle()) {
-            this.inventory[0].shoot();
+            if (mouseIsPressed) {
+                if (mouseButton === LEFT) {
+                    this.inventory[0].shoot();
+                }
+            }
         }
+
     }
 
     move(mapReference, key) {
@@ -88,15 +93,15 @@ class Player {
         return this.x;
     }
 
-    hitBox(enemy){
+    hitBox(enemy) {
         for (let i = 0; i < enemy.length; i++) {
-            if (dist(this.x,this.y,enemy[i].getX(),enemy[i].getY())<30) {
+            if (dist(this.x, this.y, enemy[i].getX(), enemy[i].getY()) < 30) {
                 this.hurt(1);
-                if (this.health <=0) {
+                if (this.health <= 0) {
                     console.log("GAME OVER");
                 }
             }
-            
+
         }
     }
 
@@ -107,16 +112,18 @@ class Player {
     getInventory() {
         return this.inventory;
     }
-    
+
     getRifle() {
         if (this.takeRifle()) {
             return this.inventory[0]
         }
         return null;
     }
-    hurt(damage){
-        this.health -=damage;
+
+    hurt(damage) {
+        this.health -= damage;
     }
+    
     getHealth() {
         return this.health;
     }
