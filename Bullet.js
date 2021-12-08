@@ -12,7 +12,7 @@ class Bullet {
         this.move();
     }
     move() {
-        this.x++;
+        this.x = this.x+10;
     }
     deactivate() {
         this.activate = false;

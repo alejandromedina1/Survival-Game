@@ -2,7 +2,7 @@ class Enemy {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.health = 50;
+        this.health = 250;
     }
 
     show() {
@@ -26,12 +26,12 @@ class Enemy {
         }
     }
 
-    hitBox(player){
+    hitBox(player) {
         let rifleReference = player.getRifle();
         if (rifleReference !== null) {
             let bullets = rifleReference.getAmmo();
             bullets.forEach(bullet => {
-                if (bullet.getActive() && dist(this.x,this.y,bullet.getX(),bullet.getY())<=30) {
+                if (bullet.getActive() && dist(this.x, this.y, bullet.getX(), bullet.getY()) <= 30) {
                     console.log("pew pew");
                     this.hurt(10);
                 }

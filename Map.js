@@ -34,6 +34,16 @@ class Map {
             this.rifle.show()
         }
     }
+
+    collectWeapon(player){
+        if (this.getRifle() !== null) {
+            if (dist(this.getRifle().getX(), this.getRifle().getY(), player.getX(), player.getY()) < 50) {
+              player.addToInventory(this.getRifle());
+              this.freeRifle();
+            }
+          }
+    }
+
     getGround() {
         return this.ground;
     }

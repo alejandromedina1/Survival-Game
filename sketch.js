@@ -15,28 +15,24 @@ function draw() {
   horde.forEach(enemy => {
     enemy.show();
     enemy.move(player);
+
   });
   player.show();
   takeWeapon();
-  /*if (mouseIsPressed) {
-    if (mouseButton === LEFT) {
-      player.shoot();
-    }
-  }
-  */
- player.shoot();
+  player.shoot();
   enemyDie();
   player.hitBox(horde);
 }
 
-function enemyDie(){
+function enemyDie() {
   for (let i = 0; i < horde.length; i++) {
     horde[i].hitBox(player);
-    if (horde[i]!== undefined && horde[i].getHealth()<=0) {
-       horde.splice(i,1);
+    if (horde[i] !== undefined && horde[i].getHealth() <= 0) {
+      horde.splice(i, 1);
     }
   }
 }
+
 
 function takeWeapon() {
   if (map.getRifle() !== null) {
@@ -46,7 +42,6 @@ function takeWeapon() {
     }
   }
 }
-
 
 function keyPressed() {
   player.move(map.getGround(), key);
