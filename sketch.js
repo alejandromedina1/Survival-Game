@@ -1,10 +1,11 @@
 let map = new Map();
-let player = new Player(loadImage("/imagenes/NF.png"), 1, 0, );
-let horde = [];
 let imgPlayer = [4];
 let imgGunPlayer = [4];
 let imgGun = [1];
 let imgEnemy = [];
+let player = new Player(1, 0);
+let horde = [];
+
 
 function setup() {
   createCanvas(1200, 700);
