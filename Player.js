@@ -1,15 +1,17 @@
 class Player {
-    constructor(column, row) {
+    constructor(column, row, photo) {
         this.row = row;
         this.column = column;
         this.x = (column * 50) + 25;
         this.y = (row * 50) + 25;
         this.inventory = [];
         this.health = 100;
+        this.photo = photo;
     }
     show() {
-        fill(0, 0, 255);
-        ellipse(this.x, this.y, 50, 50)
+        imageMode(CENTER);
+        image(this.photo, this.x, this.y);
+        imageMode(CORNER);
         this.move();
         fill(255);
         rectMode(CENTER);
