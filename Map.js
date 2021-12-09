@@ -17,14 +17,15 @@ class Map {
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         ];
         this.rifle = new Weapon(5, 10);
+        this.aid = new Aid(6,20);
     }
 
     show() {
         for (let row = 0; row < 14; row++) {
             for (let column = 0; column < 24; column++) {
-                if (this.ground[row][column] == 0) {
+                if (this.ground[row][column] === 0) {
                     fill(255);
-                } else {
+                }else{
                     fill(0);
                 }
                 rect(column * 50, row * 50, 50, 50);
@@ -33,24 +34,24 @@ class Map {
         if (this.rifle !== null) {
             this.rifle.show()
         }
-    }
-
-    collectWeapon(player){
-        if (this.getRifle() !== null) {
-            if (dist(this.getRifle().getX(), this.getRifle().getY(), player.getX(), player.getY()) < 50) {
-              player.addToInventory(this.getRifle());
-              this.freeRifle();
-            }
-          }
+        if (this.aid !== null) {
+            this.aid.show();
+        }
     }
 
     getGround() {
-        return this.ground;
+        return this.ground
     }
     getRifle() {
         return this.rifle;
     }
+    getAid() {
+        return this.aid;
+    }
     freeRifle() {
         this.rifle = null;
+    }
+    freeAid() {
+        this.aid = null;
     }
 }

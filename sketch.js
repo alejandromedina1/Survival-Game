@@ -19,6 +19,7 @@ function draw() {
   });
   player.show();
   takeWeapon();
+  takeAid();
   player.shoot();
   enemyDie();
   player.hitBox(horde);
@@ -39,6 +40,15 @@ function takeWeapon() {
     if (dist(map.getRifle().getX(), map.getRifle().getY(), player.getX(), player.getY()) < 50) {
       player.addToInventory(map.getRifle());
       map.freeRifle();
+    }
+  }
+}
+
+function takeAid() {
+  if (map.getAid() !== null) {
+    if (dist(map.getAid().getX(), map.getAid().getY(), player.getX(), player.getY()) < 50) {
+      map.freeAid();
+      player.setHealth();
     }
   }
 }

@@ -14,7 +14,7 @@ class Player {
         fill(255);
         rectMode(CENTER);
         if (this.takeRifle()) {
-            fill(0, 255, 0);
+            fill(0);
             rect(this.x, this.y, 20, 20);
             this.inventory[0].show();
         }
@@ -115,7 +115,7 @@ class Player {
 
     getRifle() {
         if (this.takeRifle()) {
-            return this.inventory[0]
+            return this.inventory[0];
         }
         return null;
     }
@@ -126,5 +126,8 @@ class Player {
     
     getHealth() {
         return this.health;
+    }
+    setHealth(){
+        this.health = this.health + 50;
     }
 }

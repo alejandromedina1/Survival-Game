@@ -1,4 +1,4 @@
-class Weapon {
+class Aid{
     constructor(row, column) {
         this.row = row;
         this.column = column;
@@ -9,24 +9,10 @@ class Weapon {
 
     show() {
         rectMode(CENTER);
-        fill(0);
+        fill(0, 255, 0);
         rect(this.x, this.y, 20, 20);
         fill(255);
         rectMode(CORNER);
-        for (let i = 0; i < this.ammo.length; i++) {
-            const bullet = this.ammo[i];
-            bullet.show();
-            bullet.move();
-        }
-    }
-
-    getAmmo() {
-        return this.ammo;
-    }
-
-    shoot() {
-        let nBullet = new Bullet(this.x,this.y);
-        this.ammo.push(nBullet);
     }
 
     getX() {
