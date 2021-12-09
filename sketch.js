@@ -1,5 +1,5 @@
 let map = new Map();
-let player = new Player( 1, 0, loadImage('/imagenes/NF.png'));
+let player = new Player(loadImage("/imagenes/NF.png"), 1, 0, );
 let horde = [];
 let imgPlayer = [4];
 let imgGunPlayer = [4];

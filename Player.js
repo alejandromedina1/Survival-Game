@@ -1,5 +1,5 @@
 class Player {
-    constructor(column, row, photo) {
+    constructor(photo, column, row) {
         this.row = row;
         this.column = column;
         this.x = (column * 50) + 25;
