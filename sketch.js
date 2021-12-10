@@ -3,14 +3,17 @@ let imgPlayer = [4];
 let imgGunPlayer = [4];
 let imgGun = [1];
 let imgEnemy = [];
-let player = new Player(1, 0);
+let player = new Player(12, 7);
 let horde = [];
 
 
 function setup() {
   createCanvas(1200, 700);
-  for (let i = 0; i < 10; i++) {
-    horde.push(new Enemy(random(-10, 1210), random(-10, 710)));
+  for (let i = 0; i < 100; i++) {
+    horde.push(new Enemy(random( -300, -100), random(0, 700)));
+    horde.push(new Enemy(random( 0,1200), random(-300, -100)));
+    horde.push(new Enemy(random( 1300, 1500), random(0, 700)));
+    horde.push(new Enemy(random( 0,1200), random(800, 1000)));
   }
 }
 
@@ -28,6 +31,9 @@ function draw() {
   player.shoot();
   enemyDie();
   player.hitBox(horde);
+  for (let i = 0; i < horde.length; i++) {
+    player.closeAttack(horde[i]);
+  }
 }
 
 function enemyDie() {
@@ -58,6 +64,16 @@ function takeAid() {
   }
 }
 
+function mouseIsPressed(){
+  for (let i = 0; i < horde.length; i++) {
+    player.closeAttack(horde[i], "RIGHT");
+  }
+
+}
+
 function keyPressed() {
   player.move(map.getGround(), key);
+  for (let i = 0; i < horde.length; i++) {
+    player.closeAttack(horde[i],key);
+  }
 }

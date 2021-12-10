@@ -34,10 +34,23 @@ class Player {
         return equipped;
     }
 
+    closeAttack(enemy, key){
+        let active = false;
+        if (key === 'q' || key === 'Q') {
+            active = true
+            if (active === true && dist(this.x, this.y, enemy.getX(),enemy.getY())<75) {
+                enemy.hurt(125);
+                active = false;
+            }
+            active = false;
+        }
+        
+    }
+
     shoot() {
         if (this.takeRifle()) {
             if (mouseIsPressed) {
-                if (mouseButton === LEFT) {
+                if (mouseButton == LEFT) {
                     this.inventory[0].shoot();
                 }
             }
@@ -95,7 +108,7 @@ class Player {
 
     hitBox(enemy) {
         for (let i = 0; i < enemy.length; i++) {
-            if (dist(this.x, this.y, enemy[i].getX(), enemy[i].getY()) < 30) {
+            if (dist(this.x, this.y, enemy[i].getX(), enemy[i].getY()) < 25) {
                 this.hurt(1);
                 if (this.health <= 0) {
                     console.log("GAME OVER");
