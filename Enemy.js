@@ -1,29 +1,42 @@
 class Enemy {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.health = 5000;
+    constructor(column, row) {
+        this.row = row;
+        this.column = column
+        this.x = (column * 50) + 25;
+        this.y = (row * 50) + 25;
+        this.health = 250;
     }
 
-    show() {
+    show(player) {
         fill(255, 0, 0);
         ellipse(this.x, this.y, 25, 25);
         fill(255);
         fill(0);
+        this.move(player);
         text(this.health, this.x, this.y + 30);
     }
 
     move(player) {
-        if (player.getX() > this.x) {
-            this.x++;
-        } else {
-            this.x--;
+        if (frameCount % 20 === 0) {
+            if (this.x < player.getX()) {
+                this.column = this.column + 1;
+            }
+            if (this.x > player.getX()) {
+                this.column = this.column - 1;
+            }
+            if (this.y < player.getY()) {
+                this.row = this.row + 1;
+            }
+            if (this.y > player.getY()) {
+                this.row = this.row - 1;
+            }
+            this.updateCoords();
         }
-        if (player.getY() > this.y) {
-            this.y++;
-        } else {
-            this.y--;
-        }
+    }
+
+    updateCoords() {
+        this.x = (this.column * 50) + 25;
+        this.y = (this.row * 50) + 25;
     }
 
     hitBox(player) {

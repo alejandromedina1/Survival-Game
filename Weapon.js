@@ -27,25 +27,6 @@ class Weapon {
     shoot() {
         let nBullet = new Bullet(this.x, this.y);
         this.ammo.push(nBullet);
-        for (let i = 0; i < this.ammo.length; i++) {
-            const bullet = this.ammo[i];
-            switch (bullet.getX()) {
-                case bullet.getX() < 0:
-                    this.ammo.splice(bullet, 1);
-                    break;
-                case 1200 < bullet.getX():
-                    this.ammo.splice(bullet, 1);
-                    break;
-                case bullet.getY() < 0:
-                    this.ammo.splice(bullet, 1);
-                    break;
-                case 700 < bullet.getY():
-                    this.ammo.splice(bullet, 1);
-                    break;
-                default:
-                    break;
-            }
-        }
     }
 
     getX() {

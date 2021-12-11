@@ -3,20 +3,26 @@ class Bullet {
         this.x = x;
         this.y = y;
         this.activate = true;
+        this.diameter = 5;
     }
 
     show() {
         fill(0, 255, 0);
-        circle(this.x, this.y, 5);
+        noStroke();
+        circle(this.x, this.y, this.diameter);
         fill(255);
         this.move();
+        stroke(0);
     }
     move() {
-        let a = atan2(mouseX - 1200 / 2, mouseY - 700 / 2);
-        this.x = this.x + 10 * sin(a);
-        this.y = this.y + 10 * cos(a);
+        let a = atan2(mouseX - this.x, mouseY - this.y);
+        this.x = this.x + 20 * sin(a);
+        this.y = this.y + 20 * cos(a);
+        if (dist(this.x,this.y,mouseX,mouseY) < 20) {
+            this.activate = false;
+            this.diameter = 0;
+        }
     }
-
     deactivate() {
         this.activate = false;
     }

@@ -10,10 +10,7 @@ let horde = [];
 function setup() {
   createCanvas(1200, 700);
   for (let i = 0; i < 4; i++) {
-    horde.push(new Enemy(random(-300, -100), random(0, 700)));
-    horde.push(new Enemy(random(0, 1200), random(-300, -100)));
-    horde.push(new Enemy(random(1300, 1500), random(0, 700)));
-    horde.push(new Enemy(random(0, 1200), random(800, 1000)));
+    horde.push(new Enemy(1,1));
   }
 }
 
@@ -21,14 +18,12 @@ function draw() {
   background(220);
   map.show();
   horde.forEach(enemy => {
-    enemy.show();
-    enemy.move(player);
+    enemy.show(player);
 
   });
   player.show();
   takeWeapon();
   takeAid();
-  player.shoot();
   enemyDie();
   player.hitBox(horde);
   for (let i = 0; i < horde.length; i++) {
@@ -69,4 +64,8 @@ function keyPressed() {
   for (let i = 0; i < horde.length; i++) {
     player.closeAttack(horde[i], key);
   }
+}
+
+function mousePressed(){
+  player.shoot();
 }

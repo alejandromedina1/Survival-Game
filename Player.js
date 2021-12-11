@@ -49,11 +49,7 @@ class Player {
 
     shoot() {
         if (this.takeRifle()) {
-            if (mouseIsPressed) {
-                if (mouseButton == LEFT) {
-                    this.inventory[0].shoot();
-                }
-            }
+            this.inventory[0].shoot();
         }
     }
 
