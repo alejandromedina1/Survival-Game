@@ -12,7 +12,9 @@ class Enemy {
         imageMode (CENTER);
         image(this.zombieImg, this.x, this.y, 50, 80);
         this.move(player);
-        text(this.health, this.x, this.y + 30);
+        fill(0);
+        text(this.health, this.x - 10, this.y - 45);
+        fill(255);
     }
 
     move(player) {

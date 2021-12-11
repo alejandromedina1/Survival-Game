@@ -13,6 +13,7 @@ class Player {
     }
     show() {
         imageMode(CENTER);
+
         switch (key) {
             case 'a' || 'A': //Lateral izquierda
                 this.x = (this.column * 50) + 25; //
@@ -34,6 +35,9 @@ class Player {
                 this.y = (this.row * 50) + 25;
                 image(this.imgFront, this.x, this.y, 50, 80);
                 break;
+                default:
+                    image(this.imgFront, this.x, this.y, 50, 80);
+                break;
         }
         this.move();
         fill(255);
@@ -45,7 +49,7 @@ class Player {
         }
         rectMode(CORNER);
         fill(0);
-        text(this.health, this.x - 10, this.y - 30);
+        text(this.health, this.x - 10, this.y - 45);
         fill(255);
     }
 
