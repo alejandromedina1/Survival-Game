@@ -9,13 +9,11 @@ let horde = [];
 
 function setup() {
   createCanvas(1200, 700);
-  for (let i = 0; i < 50; i++) {
-    if (frameCount % 10 === 0) {
-      horde.push(new Enemy(random(-300, -100), random(0, 700)));
-      horde.push(new Enemy(random(0, 1200), random(-300, -100)));
-      horde.push(new Enemy(random(1300, 1500), random(0, 700)));
-      horde.push(new Enemy(random(0, 1200), random(800, 1000)));
-    }
+  for (let i = 0; i < 4; i++) {
+    horde.push(new Enemy(random(-300, -100), random(0, 700)));
+    horde.push(new Enemy(random(0, 1200), random(-300, -100)));
+    horde.push(new Enemy(random(1300, 1500), random(0, 700)));
+    horde.push(new Enemy(random(0, 1200), random(800, 1000)));
   }
 }
 

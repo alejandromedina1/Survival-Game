@@ -12,8 +12,11 @@ class Bullet {
         this.move();
     }
     move() {
-        this.x = this.x + 10;
+        let a = atan2(mouseX - 1200 / 2, mouseY - 700 / 2);
+        this.x = this.x + 10 * sin(a);
+        this.y = this.y + 10 * cos(a);
     }
+
     deactivate() {
         this.activate = false;
     }

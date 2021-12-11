@@ -55,7 +55,6 @@ class Player {
                 }
             }
         }
-
     }
 
     move(mapReference, key) {
