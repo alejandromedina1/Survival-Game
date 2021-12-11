@@ -1,12 +1,32 @@
 let map = new Map();
-let imgPlayer = [4];
-let imgGunPlayer = [4];
-let imgGun = [1];
-let imgEnemy = [];
 let player = new Player(12, 7);
 let horde = [];
 
+function preload(){
+  //Base player images
+  imgFP = loadImage("imagenes/NF.png");
+  imgBP = loadImage("imagenes/NB.png");
+  imgLP = loadImage("imagenes/NL.png");
+  imgRP = loadImage("imagenes/NR.png");
 
+  //Bolillo player images
+  imgFPB = loadImage("imagenes/NF_Bolillo de frente.png");
+  imgLPB = loadImage("imagenes/NL_Bolillo de lado.png");
+  imgRPB = loadImage("imagenes/NR_Bolillo de lado.png");
+
+  //Rifle player images
+  imgFPR = loadImage("imagenes/NF_Rifle.png");
+  imgLPR = loadImage("imagenes/NL_Rifle.png");
+  imgRPR = loadImage("imagenes/NR_Rifle.png");
+
+  //Zombie
+  imgZombie = loadImage ("imagenes/Zombie.png");
+
+  //Med kit
+  imgMedKit = loadImage ("imagenes/Botiquín.png")
+
+
+}
 function setup() {
   createCanvas(1200, 700);
   for (let i = 0; i < 4; i++) {
