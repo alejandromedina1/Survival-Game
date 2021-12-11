@@ -6,8 +6,6 @@ class Player {
         this.imgBackward = imgBackward;
         this.imgRight = imgRight;
         this.imgLeft = imgLeft;
-        //Player orientation
-        this.orientation = 3;
         this.x = (column * 50) + 25;
         this.y = (row * 50) + 25;
         this.inventory = [];
@@ -16,26 +14,25 @@ class Player {
     show() {
         imageMode(CENTER);
         switch (key) {
-            case 'a' : //Lateral izquierda
+            case 'a' || 'A': //Lateral izquierda
                 this.x = (this.column * 50) + 25; //
                 this.y = (this.row * 50) + 25;
-                image(this.imgLeft, this.x, this.y);
-
+                image(this.imgLeft, this.x, this.y, 50, 80);
                 break;
-            case 'w': // Trasera
+            case 'w' || 'W': // Trasera
                 this.x = (this.column * 50) + 25; //
                 this.y = (this.row * 50) + 25;
-                image(this.imgBackward, this.x, this.y);
+                image(this.imgBackward, this.x, this.y, 50, 80);
                 break;
-            case 'd': //Lateral derecha
+            case 'd' || 'D': //Lateral derecha
                 this.x = (this.column * 50) + 25; //
                 this.y = (this.row * 50) + 25;
-                image(this.imgRight, this.x, this.y);
+                image(this.imgRight, this.x, this.y, 50, 80);
                 break;
-            case 's'://Frontal
+            case 's' || 'S': //Frontal
                 this.x = (this.column * 50) + 25; //
                 this.y = (this.row * 50) + 25;
-                image(this.imgFront, this.x, this.y);
+                image(this.imgFront, this.x, this.y, 50, 80);
                 break;
         }
         this.move();

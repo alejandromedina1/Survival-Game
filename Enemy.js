@@ -1,17 +1,16 @@
 class Enemy {
-    constructor(column, row) {
+    constructor(column, row,zombieImg) {
         this.row = row;
         this.column = column
+        this.zombieImg = zombieImg;
         this.x = (column * 50) + 25;
         this.y = (row * 50) + 25;
         this.health = 250;
     }
 
     show(player) {
-        fill(255, 0, 0);
-        ellipse(this.x, this.y, 25, 25);
-        fill(255);
-        fill(0);
+        imageMode (CENTER);
+        image(this.zombieImg, this.x, this.y, 50, 80);
         this.move(player);
         text(this.health, this.x, this.y + 30);
     }
