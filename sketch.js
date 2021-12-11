@@ -1,34 +1,35 @@
 let map = new Map();
-let player = new Player(12, 7);
 let horde = [];
+let player;
 
 function preload(){
   //Base player images
-  imgFP = loadImage("imagenes/NF.png");
-  imgBP = loadImage("imagenes/NB.png");
-  imgLP = loadImage("imagenes/NL.png");
-  imgRP = loadImage("imagenes/NR.png");
+  imgFP = loadImage("NF.png");
+  imgBP = loadImage("NB.png");
+  imgLP = loadImage("NL.png");
+  imgRP = loadImage("NR.png");
 
   //Bolillo player images
-  imgFPB = loadImage("imagenes/NF_Bolillo de frente.png");
-  imgLPB = loadImage("imagenes/NL_Bolillo de lado.png");
-  imgRPB = loadImage("imagenes/NR_Bolillo de lado.png");
+  imgFPB = loadImage("NF_Bolillo de frente.png");
+  imgLPB = loadImage("NL_Bolillo de lado.png");
+  imgRPB = loadImage("NR_Bolillo de lado.png");
 
   //Rifle player images
-  imgFPR = loadImage("imagenes/NF_Rifle.png");
-  imgLPR = loadImage("imagenes/NL_Rifle.png");
-  imgRPR = loadImage("imagenes/NR_Rifle.png");
+  imgFPR = loadImage("NF_Rifle.png");
+  imgLPR = loadImage("NL_Rifle.png");
+  imgRPR = loadImage("NR_Rifle.png");
 
   //Zombie
-  imgZombie = loadImage ("imagenes/Zombie.png");
+  imgZombie = loadImage ("Zombie.png");
 
   //Med kit
-  imgMedKit = loadImage ("imagenes/Botiquín.png")
+  imgMedKit = loadImage ("Botiquín.png")
 
 
 }
 function setup() {
   createCanvas(1200, 700);
+  let player = new Player(12, 7, imgFP, imgBP, imgRP, imgLP);
   for (let i = 0; i < 4; i++) {
     horde.push(new Enemy(1,1));
   }
@@ -41,6 +42,7 @@ function draw() {
     enemy.show(player);
 
   });
+  preload();
   player.show();
   takeWeapon();
   takeAid();

@@ -1,15 +1,43 @@
 class Player {
-    constructor(column, row) {
+    constructor(column, row, imgFront, imgBackward, imgRight, imgLeft) {
         this.row = row;
         this.column = column;
+        this.imgFront = imgFront;
+        this.imgBackward = imgBackward;
+        this.imgRight = imgRight;
+        this.imgLeft = imgLeft;
+        //Player orientation
+        this.orientation = 3;
         this.x = (column * 50) + 25;
         this.y = (row * 50) + 25;
         this.inventory = [];
         this.health = 100;
     }
     show() {
-        fill(0,0,255);
-        ellipse(this.x, this.y, 50, 50);
+        imageMode(CENTER);
+        switch (key) {
+            case 'a' : //Lateral izquierda
+                this.x = (this.column * 50) + 25; //
+                this.y = (this.row * 50) + 25;
+                image(this.imgLeft, this.x, this.y);
+
+                break;
+            case 'w': // Trasera
+                this.x = (this.column * 50) + 25; //
+                this.y = (this.row * 50) + 25;
+                image(this.imgBackward, this.x, this.y);
+                break;
+            case 'd': //Lateral derecha
+                this.x = (this.column * 50) + 25; //
+                this.y = (this.row * 50) + 25;
+                image(this.imgRight, this.x, this.y);
+                break;
+            case 's'://Frontal
+                this.x = (this.column * 50) + 25; //
+                this.y = (this.row * 50) + 25;
+                image(this.imgFront, this.x, this.y);
+                break;
+        }
         this.move();
         fill(255);
         rectMode(CENTER);
