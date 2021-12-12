@@ -1,4 +1,9 @@
-let map;
+let map1;
+let map2;
+let map3;
+let map4;
+let map5;
+let map6;
 let horde = [];
 let player;
 
@@ -22,6 +27,8 @@ let imgBarco;
 let imgBosque;
 let imgCarretera;
 let imgCementerio;
+let imgPlaya;
+
 //Pistas
 let imgPista1;
 let imgPista2;
@@ -62,6 +69,7 @@ function setup() {
   imgBosque = loadImage("Bosque.png");
   imgCarretera = loadImage("Carretera.png");
   imgCementerio = loadImage("Cementerio.png");
+  imgPlaya = loadImage("Playa.png");
 
   //Pistas
   imgPista1 = loadImage("Pista 1.png");
@@ -69,7 +77,12 @@ function setup() {
   imgPista3 = loadImage("Pista 3.png");
   imgPista4 = loadImage("Pista 4.png");
   imgPista5 = loadImage("Pista 5.png");
-  map = new Map(imgBarco);
+  map1 = new Map(imgBarco);
+  map2 = new Map(imgPlaya);
+  map3 = new Map(imgCarretera);
+  map4 = new Map(imgCiudad);
+  map5 = new Map(imgBosque);
+  map6 = new Map(imgCementerio);
 
 
 
@@ -90,8 +103,8 @@ function draw() {
 
       break;
     case 2: // Nivel 1
-      map.ground(0);
-      map.show();
+      map1.ground(0);
+      map1.show();
       horde.forEach(enemy => {
         enemy.show(player);
       });
@@ -103,7 +116,7 @@ function draw() {
       for (let i = 0; i < horde.length; i++) {
         player.closeAttack(horde[i]);
       }
-      if (player.changeLevel(map.getLevel())===true) {
+      if (player.changeLevel(map1.getLevel())===true) {
         screen = 4;
       }
       break;
@@ -111,36 +124,36 @@ function draw() {
 
       break;
     case 4: // Nivel 2
-      map.ground(1);
-      map.show();
+      map2.ground(1);
+      map2.show();
       break;
     case 5: // Pista 2
 
       break;
     case 6: // Nivel 3
-      map.ground(2);
-      map.show();
+      map3.ground(2);
+      map3.show();
       break;
     case 7: // Pista 3
 
       break;
     case 8: // Nivel 4
-      map.ground(3);
-      map.show();
+      map4.ground(3);
+      map4.show();
       break;
     case 9: // Pista 4
 
       break;
     case 10: // Nivel 5
-      map.ground(4);
-      map.show();
+      map5.ground(4);
+      map5.show();
       break;
     case 11: // Pista 5
 
       break;
     case 12: // Nivel 6
-      map.ground(5);
-      map.show();
+      map6.ground(5);
+      map6.show();
       break;
     case 13: // Game Over
 
@@ -165,25 +178,25 @@ function enemyDie() {
 
 
 function takeWeapon() {
-  if (map.getRifle() !== null) {
-    if (dist(map.getRifle().getX(), map.getRifle().getY(), player.getX(), player.getY()) < 50) {
-      player.addToInventory(map.getRifle());
-      map.freeRifle();
+  if (map1.getRifle() !== null) {
+    if (dist(map1.getRifle().getX(), map1.getRifle().getY(), player.getX(), player.getY()) < 50) {
+      player.addToInventory(map1.getRifle());
+      map1.freeRifle();
     }
   }
 }
 
 function takeAid() {
-  if (map.getAid() !== null) {
-    if (dist(map.getAid().getX(), map.getAid().getY(), player.getX(), player.getY()) < 50) {
-      map.freeAid();
+  if (map1.getAid() !== null) {
+    if (dist(map1.getAid().getX(), map1.getAid().getY(), player.getX(), player.getY()) < 50) {
+      map1.freeAid();
       player.setHealth();
     }
   }
 }
 //Movimiento del personaje y ataque cuerpo a cuerpo
 function keyPressed() {
-  player.move(map.getLevel(), key);
+  player.move(map1.getLevel(), key);
   for (let i = 0; i < horde.length; i++) {
     player.closeAttack(horde[i], key);
   }
