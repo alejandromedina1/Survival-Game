@@ -1,9 +1,4 @@
-let map1;
-let map2;
-let map3;
-let map4;
-let map5;
-let map6;
+let map = [];
 let horde = [];
 let player;
 
@@ -77,12 +72,13 @@ function setup() {
   imgPista3 = loadImage("Pista 3.png");
   imgPista4 = loadImage("Pista 4.png");
   imgPista5 = loadImage("Pista 5.png");
-  map1 = new Map(imgBarco);
-  map2 = new Map(imgPlaya);
-  map3 = new Map(imgCarretera);
-  map4 = new Map(imgCiudad);
-  map5 = new Map(imgBosque);
-  map6 = new Map(imgCementerio);
+
+  map[0] = new Map(imgBarco);
+  map[1] = new Map(imgPlaya);
+  map[2] = new Map(imgCarretera);
+  map[3] = new Map(imgCiudad);
+  map[4] = new Map(imgBosque);
+  map[5] = new Map(imgCementerio);
 
 
 
@@ -103,8 +99,8 @@ function draw() {
 
       break;
     case 2: // Nivel 1
-      map1.ground(0);
-      map1.show();
+      map[0].ground(0);
+      map[0].show();
       horde.forEach(enemy => {
         enemy.show(player);
       });
@@ -116,7 +112,7 @@ function draw() {
       for (let i = 0; i < horde.length; i++) {
         player.closeAttack(horde[i]);
       }
-      if (player.changeLevel(map1.getLevel())===true) {
+      if (player.changeLevel(map[0].getLevel()) === true) {
         screen = 4;
       }
       break;
@@ -124,36 +120,36 @@ function draw() {
 
       break;
     case 4: // Nivel 2
-      map2.ground(1);
-      map2.show();
+      map[1].ground(1);
+      map[1].show();
       break;
     case 5: // Pista 2
 
       break;
     case 6: // Nivel 3
-      map3.ground(2);
-      map3.show();
+      map[2].ground(2);
+      map[2].show();
       break;
     case 7: // Pista 3
 
       break;
     case 8: // Nivel 4
-      map4.ground(3);
-      map4.show();
+      map[3].ground(3);
+      map[3].show();
       break;
     case 9: // Pista 4
 
       break;
     case 10: // Nivel 5
-      map5.ground(4);
-      map5.show();
+      map[4].ground(4);
+      map[4].show();
       break;
     case 11: // Pista 5
 
       break;
     case 12: // Nivel 6
-      map6.ground(5);
-      map6.show();
+      map[5].ground(5);
+      map[5].show();
       break;
     case 13: // Game Over
 
@@ -178,29 +174,40 @@ function enemyDie() {
 
 
 function takeWeapon() {
-  if (map1.getRifle() !== null) {
-    if (dist(map1.getRifle().getX(), map1.getRifle().getY(), player.getX(), player.getY()) < 50) {
-      player.addToInventory(map1.getRifle());
-      map1.freeRifle();
+  for (let i = 0; i < map.length; i++) {
+    if (map[i].getRifle() !== null) {
+      if (dist(map[i].getRifle().getX(), map[i].getRifle().getY(), player.getX(), player.getY()) < 50) {
+        player.addToInventory(map[i].getRifle());
+        map[i].freeRifle();
+      }
     }
   }
 }
 
+
 function takeAid() {
-  if (map1.getAid() !== null) {
-    if (dist(map1.getAid().getX(), map1.getAid().getY(), player.getX(), player.getY()) < 50) {
-      map1.freeAid();
-      player.setHealth();
+  for (let i = 0; i < map.length; i++) {
+    if (map[i].getAid() !== null) {
+      if (dist(map[i].getAid().getX(), map[i].getAid().getY(), player.getX(), player.getY()) < 50) {
+        map[i].freeAid();
+        player.setHealth();
+      }
     }
   }
+
 }
+
 //Movimiento del personaje y ataque cuerpo a cuerpo
 function keyPressed() {
-  player.move(map1.getLevel(), key);
-  for (let i = 0; i < horde.length; i++) {
-    player.closeAttack(horde[i], key);
+  for (let i = 0; i < map.length; i++) {
+    player.move(map[i].getLevel(), key);
+    for (let i = 0; i < horde.length; i++) {
+      player.closeAttack(horde[i], key);
+    }
   }
+
 }
+
 
 function mousePressed() {
   player.shoot();
