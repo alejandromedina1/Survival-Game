@@ -35,8 +35,8 @@ class Player {
                 this.y = (this.row * 50) + 25;
                 image(this.imgFront, this.x, this.y, 50, 80);
                 break;
-                default:
-                    image(this.imgFront, this.x, this.y, 50, 80);
+            default:
+                image(this.imgFront, this.x, this.y, 50, 80);
                 break;
         }
         this.move();
@@ -63,17 +63,16 @@ class Player {
         return equipped;
     }
 
-    closeAttack(enemy, key){
+    closeAttack(enemy, key) {
         let active = false;
         if (key === 'q' || key === 'Q') {
             active = true
-            if (active === true && dist(this.x, this.y, enemy.getX(),enemy.getY())<75) {
+            if (active === true && dist(this.x, this.y, enemy.getX(), enemy.getY()) < 75) {
                 enemy.hurt(125);
                 active = false;
             }
             active = false;
         }
-        
     }
 
     shoot() {
@@ -85,12 +84,12 @@ class Player {
     move(mapReference, key) {
         switch (key) {
             case 'a' || 'A':
-                if (this.column - 1 >= 0 && mapReference[this.row][this.column - 1] === 0) {
+                if (this.column - 1 >= 0 && mapReference[this.row][this.column - 1] !== 1) {
                     this.column--;
                 }
                 break;
             case 'd' || 'D':
-                if (this.column + 1 < 24 && mapReference[this.row][this.column + 1] === 0) {
+                if (this.column + 1 < 24 && mapReference[this.row][this.column + 1] !== 1) {
                     this.column++;
                 }
                 break;
@@ -99,12 +98,12 @@ class Player {
         }
         switch (key) {
             case 'w' || 'W':
-                if (this.row - 1 >= 0 && mapReference[this.row - 1][this.column] === 0) {
+                if (this.row - 1 >= 0 && mapReference[this.row - 1][this.column] !== 1) {
                     this.row--;
                 }
                 break;
             case 's' || 'S':
-                if (this.row + 1 < 14 && mapReference[this.row + 1][this.column] === 0) {
+                if (this.row + 1 < 14 && mapReference[this.row + 1][this.column] !== 1) {
                     this.row++;
                 }
                 break;
@@ -141,30 +140,25 @@ class Player {
 
         }
     }
-
     getY() {
         return this.y;
     }
-
     getInventory() {
         return this.inventory;
     }
-
     getRifle() {
         if (this.takeRifle()) {
             return this.inventory[0];
         }
         return null;
     }
-
     hurt(damage) {
         this.health -= damage;
     }
-    
     getHealth() {
         return this.health;
     }
-    setHealth(){
+    setHealth() {
         this.health = this.health + 50;
     }
 }
