@@ -18,20 +18,22 @@ class Enemy {
     }
 
     move(player) {
-        if (frameCount % 20 === 0) {
-            if (this.x < player.getX()) {
-                this.column = this.column + 1;
+        for (let i = 0; i < player.length; i++) {
+            if (frameCount % 20 === 0) {
+                if (this.x < player[i].getX()) {
+                    this.column = this.column + 1;
+                }
+                if (this.x > player[i].getX()) {
+                    this.column = this.column - 1;
+                }
+                if (this.y < player[i].getY()) {
+                    this.row = this.row + 1;
+                }
+                if (this.y > player[i].getY()) {
+                    this.row = this.row - 1;
+                }
+                this.updateCoords();
             }
-            if (this.x > player.getX()) {
-                this.column = this.column - 1;
-            }
-            if (this.y < player.getY()) {
-                this.row = this.row + 1;
-            }
-            if (this.y > player.getY()) {
-                this.row = this.row - 1;
-            }
-            this.updateCoords();
         }
     }
 
@@ -41,7 +43,8 @@ class Enemy {
     }
 
     hitBox(player) {
-        let rifleReference = player.getRifle();
+        for (let i = 0; i < player.length; i++) {
+            let rifleReference = player[i].getRifle();
         if (rifleReference !== null) {
             let bullets = rifleReference.getAmmo();
             bullets.forEach(bullet => {
@@ -49,6 +52,7 @@ class Enemy {
                     this.hurt(10);
                 }
             });
+        } 
         }
     }
 

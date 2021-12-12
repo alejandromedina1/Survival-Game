@@ -1,7 +1,8 @@
 //AkaGuille
 let map = [];
 let horde = [];
-let player;
+let player = [];
+let clue;
 
 //Imagenes
 let imgFP;
@@ -74,7 +75,7 @@ function setup() {
   imgPista4 = loadImage("Pista 4.png");
   imgPista5 = loadImage("Pista 5.png");
 
-  map[0] = new Map(imgBarco);
+  map[0] = new Map(imgBarco, 12 , 7 , 8, 8);
   map[1] = new Map(imgPlaya);
   map[2] = new Map(imgCarretera);
   map[3] = new Map(imgCiudad);
@@ -83,7 +84,7 @@ function setup() {
 
 
 
-  player = new Player(12, 7, imgFP, imgBP, imgRP, imgLP);
+  player[0] = new Player(21, 7, imgFP, imgBP, imgRP, imgLP);
   for (let i = 0; i < 4; i++) {
     horde.push(new Enemy(1, 1, imgZombie));
   }
@@ -105,15 +106,15 @@ function draw() {
       horde.forEach(enemy => {
         enemy.show(player);
       });
-      player.show();
+      player[0].show();
       takeWeapon();
       takeAid();
       enemyDie();
-      player.hitBox(horde);
+      player[0].hitBox(horde);
       for (let i = 0; i < horde.length; i++) {
-        player.closeAttack(horde[i]);
+        player[0].closeAttack(horde[i]);
       }
-      if (player.changeLevel(map[0].getLevel()) === true) {
+      if (player[0].changeLevel(map[0].getLevel()) === true) {
         screen = 4;
       }
       break;
@@ -176,10 +177,12 @@ function enemyDie() {
 
 function takeWeapon() {
   for (let i = 0; i < map.length; i++) {
-    if (map[i].getRifle() !== null) {
-      if (dist(map[i].getRifle().getX(), map[i].getRifle().getY(), player.getX(), player.getY()) < 50) {
-        player.addToInventory(map[i].getRifle());
-        map[i].freeRifle();
+    for (let j = 0; j < player.length; j++) {
+      if (map[i].getRifle() !== null) {
+        if (dist(map[i].getRifle().getX(), map[i].getRifle().getY(), player[j].getX(), player[j].getY()) < 50) {
+          player[j].addToInventory(map[i].getRifle());
+          map[i].freeRifle();
+        }
       }
     }
   }
@@ -188,28 +191,32 @@ function takeWeapon() {
 
 function takeAid() {
   for (let i = 0; i < map.length; i++) {
-    if (map[i].getAid() !== null) {
-      if (dist(map[i].getAid().getX(), map[i].getAid().getY(), player.getX(), player.getY()) < 50) {
-        map[i].freeAid();
-        player.setHealth();
+    for (let j = 0; j < player.length; j++) {
+      if (map[i].getAid() !== null) {
+        if (dist(map[i].getAid().getX(), map[i].getAid().getY(), player[j].getX(), player[j].getY()) < 50) {
+          map[i].freeAid();
+          player[j].setHealth();
+        }
       }
     }
   }
-
 }
 
 //Movimiento del personaje y ataque cuerpo a cuerpo
 function keyPressed() {
-  for (let i = 0; i < map.length; i++) {
-    player.move(map[i].getLevel(), key);
-    for (let i = 0; i < horde.length; i++) {
-      player.closeAttack(horde[i], key);
+  for (let j = 0; j < map.length; j++) {
+    for (let u = 0; u < player.length; u++) {
+      player[u].move(map[j].getLevel(), key);
+      for (let i = 0; i < horde.length; i++) {
+        player[u].closeAttack(horde[i], key);
+      }
     }
   }
-
 }
 
 
 function mousePressed() {
-  player.shoot();
+  for (let i = 0; i < player.length; i++) {
+    player[i].shoot(); 
+  }
 }

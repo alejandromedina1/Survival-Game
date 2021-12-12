@@ -4,7 +4,6 @@ class Aid{
         this.column = column;
         this.x = (column * 50) + 25;
         this.y = (row * 50) + 25;
-        this.ammo = []
     }
 
     show() {

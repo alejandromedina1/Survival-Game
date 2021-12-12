@@ -1,5 +1,5 @@
 class Weapon {
-    constructor(row, column) {
+    constructor(column, row) {
         this.row = row;
         this.column = column;
         this.x = (column * 50) + 25;

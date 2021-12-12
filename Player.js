@@ -130,6 +130,12 @@ class Player {
         }
     }
 
+    showClue(mapReference){
+        if (mapReference [this.row][this.column] === 3) {
+            return true;
+        }
+    }
+
     getX() {
         return this.x;
     }
