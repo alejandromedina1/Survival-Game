@@ -138,6 +138,11 @@ class Map {
                 break;
         }
     }
+    changeLevel(){
+        if (this.level[row][column] === 2) {
+            return true;
+        }
+    }
     getLocation(newColumn, newRow){
         return this.level[newColumn][newRow];
     }

@@ -74,6 +74,9 @@ function draw() {
       for (let i = 0; i < horde.length; i++) {
         player.closeAttack(horde[i]);
       }
+      if (player.changeLevel(map.getLevel())===true) {
+        screen = 4;
+      }
       break;
     case 3: // Pista 1
 

@@ -125,6 +125,12 @@ class Player {
         this.y = (this.row * 50) + 25;
     }
 
+    changeLevel(mapReference){
+        if (mapReference [this.row][this.column] === 2) {
+            return true;
+        }
+    }
+
     getX() {
         return this.x;
     }
