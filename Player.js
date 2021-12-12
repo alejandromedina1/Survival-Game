@@ -18,25 +18,25 @@ class Player {
             case 'a' || 'A': //Lateral izquierda
                 this.x = (this.column * 50) + 25; //
                 this.y = (this.row * 50) + 25;
-                image(this.imgLeft, this.x, this.y, 50, 80);
+                image(this.imgLeft, this.x, this.y, 50, 50);
                 break;
             case 'w' || 'W': // Trasera
                 this.x = (this.column * 50) + 25; //
                 this.y = (this.row * 50) + 25;
-                image(this.imgBackward, this.x, this.y, 50, 80);
+                image(this.imgBackward, this.x, this.y, 50, 50);
                 break;
             case 'd' || 'D': //Lateral derecha
                 this.x = (this.column * 50) + 25; //
                 this.y = (this.row * 50) + 25;
-                image(this.imgRight, this.x, this.y, 50, 80);
+                image(this.imgRight, this.x, this.y, 50, 50);
                 break;
             case 's' || 'S': //Frontal
                 this.x = (this.column * 50) + 25; //
                 this.y = (this.row * 50) + 25;
-                image(this.imgFront, this.x, this.y, 50, 80);
+                image(this.imgFront, this.x, this.y, 50, 50);
                 break;
             default:
-                image(this.imgFront, this.x, this.y, 50, 80);
+                image(this.imgFront, this.x, this.y, 50, 50);
                 break;
         }
         this.move();
