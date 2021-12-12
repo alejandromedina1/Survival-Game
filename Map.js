@@ -1,11 +1,15 @@
 class Map {
-    constructor() {
+    constructor(img) {
         this.level = [];
         this.rifle = new Weapon(5, 10);
         this.aid = new Aid(6,20);
+        this.img = img;
     }
     //Metodo para pintar
     show() {
+        ImageMode(CENTER);
+        Image(this.img, 1200, 700);
+        ImageMode(CORNER);
         for (let row = 0; row < 14; row++) {
             for (let column = 0; column < 24; column++) {
                 if (this.level[row][column] !== 1) {

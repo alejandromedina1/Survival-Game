@@ -16,6 +16,18 @@ let imgRPR;
 let imgZombie;
 let imgMedKit;
 let imgRifle;
+//Imagenes mapas
+let imgCiudad;
+let imgBarco;
+let imgBosque;
+let imgCarretera;
+let imgCementerio;
+//Pistas
+let imgPista1;
+let imgPista2;
+let imgPista3;
+let imgPista4;
+let imgPista5;
 
 function setup() {
   createCanvas(1200, 700);
@@ -43,6 +55,22 @@ function setup() {
 
   //Rifle
   imgRifle = loadImage("AK-47.png");
+
+  //Mapas
+  imgCiudad = loadImage("Mapaciudad.png");
+  imgBarco = loadImage("Barco.png");
+  imgBosque = loadImage("Bosque.png");
+  imgCarretera = loadImage("Carretera.png");
+  imgCementerio = loadImage("Cementerio.png");
+
+  //Pistas
+  imgPista1 = loadImage("Pista 1.png");
+  imgPista2 = loadImage("Pista 2.png");
+  imgPista3 = loadImage("Pista 3.png");
+  imgPista4 = loadImage("Pista 4.png");
+  imgPista5 = loadImage("Pista 5.png");
+
+
 
   player = new Player(12, 7, imgFP, imgBP, imgRP, imgLP);
   for (let i = 0; i < 4; i++) {
