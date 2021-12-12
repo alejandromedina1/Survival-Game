@@ -1,15 +1,13 @@
 class Map {
-    constructor(img) {
+    constructor(image) {
         this.level = [];
         this.rifle = new Weapon(5, 10);
         this.aid = new Aid(6,20);
-        this.img = img;
+        this.image = image;
     }
     //Metodo para pintar
     show() {
-        ImageMode(CENTER);
-        Image(this.img, 1200, 700);
-        ImageMode(CORNER);
+        
         for (let row = 0; row < 14; row++) {
             for (let column = 0; column < 24; column++) {
                 if (this.level[row][column] !== 1) {
@@ -20,6 +18,9 @@ class Map {
                 rect(column * 50, row * 50, 50, 50);
             }
         }
+        imageMode(CENTER);
+        image(this.image, 600, 350);
+        imageMode(CORNER);
         if (this.rifle !== null) {
             this.rifle.show()
         }

@@ -1,4 +1,4 @@
-let map = new Map();
+let map;
 let horde = [];
 let player;
 
@@ -69,6 +69,7 @@ function setup() {
   imgPista3 = loadImage("Pista 3.png");
   imgPista4 = loadImage("Pista 4.png");
   imgPista5 = loadImage("Pista 5.png");
+  map = new Map(imgBarco);
 
 
 
