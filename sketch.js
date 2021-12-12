@@ -1,3 +1,4 @@
+//AkaGuille
 let map = [];
 let horde = [];
 let player;

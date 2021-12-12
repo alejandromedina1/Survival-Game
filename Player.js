@@ -12,8 +12,7 @@ class Player {
         this.health = 100;
     }
     show() {
-        imageMode(CENTER);
-
+        imageMode(CENTER); 
         switch (key) {
             case 'a' || 'A': //Lateral izquierda
                 this.x = (this.column * 50) + 25; //
