@@ -4,7 +4,7 @@ class Clue{
     }
     show(){
         imageMode(CENTER);
-        image(this.image, 1200, 700);
+        image(this.image, 600, 350);
         imageMode(CENTER);
     }
 }

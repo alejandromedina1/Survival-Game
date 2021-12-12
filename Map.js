@@ -23,7 +23,7 @@ class Map {
             }
         }
         //imageMode(CENTER);
-        image(this.image, 600, 350, 1200, 700);
+        //image(this.image, 600, 350, 1200, 700);
         //imageMode(CORNER);
         if (this.rifle !== null) {
             this.rifle.show()

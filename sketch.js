@@ -1,8 +1,11 @@
 //AkaGuille
 let map = [];
 let horde = [];
-let player = [];
+let player;
 let clue;
+
+//Pista del nivel 1 ( cofre del tesoro)
+let hint;
 
 //Imagenes
 let imgFP;
@@ -75,24 +78,40 @@ function setup() {
   imgPista4 = loadImage("Pista 4.png");
   imgPista5 = loadImage("Pista 5.png");
 
-  map[0] = new Map(imgBarco, 12 , 7 , 8, 8);
+  map[0] = new Map(imgBarco, 12, 7, 8, 8);
   map[1] = new Map(imgPlaya);
   map[2] = new Map(imgCarretera);
   map[3] = new Map(imgCiudad);
   map[4] = new Map(imgBosque);
   map[5] = new Map(imgCementerio);
 
+  hint = loadImage("Clue.png");
+  clue = new Clue(hint);
+
+  let xP = 21;
+  let yP = 7;
+  player = new Player(xP, yP, imgFP, imgBP, imgRP, imgLP);
 
 
-  player[0] = new Player(21, 7, imgFP, imgBP, imgRP, imgLP);
-  for (let i = 0; i < 4; i++) {
-    horde.push(new Enemy(1, 1, imgZombie));
+  if (map[0]) {
+    for (let i = 0; i < 4; i++) {
+      horde.push(new Enemy(0, 0, imgZombie));
+      horde.push(new Enemy(1, 7, imgZombie));
+      horde.push(new Enemy(1, 14, imgZombie));
+    }
+  }
+  if (map[1]) {
+    for (let i = 0; i < 4; i++) {
+      this.xP = 21;
+      this.yP = 4
+    }
   }
 
 }
 
 function draw() {
   background(220);
+  
   switch (screen) {
     case 0: // Pantalla inicial
 
@@ -104,18 +123,14 @@ function draw() {
       map[0].ground(0);
       map[0].show();
       horde.forEach(enemy => {
-        enemy.show(player);
+        enemy.show();
+        enemy.move(player);
       });
-      player[0].show();
-      takeWeapon();
-      takeAid();
-      enemyDie();
-      player[0].hitBox(horde);
-      for (let i = 0; i < horde.length; i++) {
-        player[0].closeAttack(horde[i]);
-      }
-      if (player[0].changeLevel(map[0].getLevel()) === true) {
+      if (player.changeLevel(map[0].getLevel()) === true) {
         screen = 4;
+      }
+      if (player.showClue(map[0].getLevel()) === true) {
+        clue.show();
       }
       break;
     case 3: // Pista 1
@@ -163,6 +178,14 @@ function draw() {
       screen = 2;
       break;
   }
+  player.show();
+  player.hitBox(horde);
+  for (let i = 0; i < horde.length; i++) {
+    player.closeAttack(horde[i]);
+  }
+  takeWeapon();
+  takeAid();
+  enemyDie();
 }
 
 function enemyDie() {
@@ -177,12 +200,10 @@ function enemyDie() {
 
 function takeWeapon() {
   for (let i = 0; i < map.length; i++) {
-    for (let j = 0; j < player.length; j++) {
-      if (map[i].getRifle() !== null) {
-        if (dist(map[i].getRifle().getX(), map[i].getRifle().getY(), player[j].getX(), player[j].getY()) < 50) {
-          player[j].addToInventory(map[i].getRifle());
-          map[i].freeRifle();
-        }
+    if (map[i].getRifle() !== null) {
+      if (dist(map[i].getRifle().getX(), map[i].getRifle().getY(), player.getX(), player.getY()) < 50) {
+        player.addToInventory(map[i].getRifle());
+        map[i].freeRifle();
       }
     }
   }
@@ -191,12 +212,10 @@ function takeWeapon() {
 
 function takeAid() {
   for (let i = 0; i < map.length; i++) {
-    for (let j = 0; j < player.length; j++) {
-      if (map[i].getAid() !== null) {
-        if (dist(map[i].getAid().getX(), map[i].getAid().getY(), player[j].getX(), player[j].getY()) < 50) {
-          map[i].freeAid();
-          player[j].setHealth();
-        }
+    if (map[i].getAid() !== null) {
+      if (dist(map[i].getAid().getX(), map[i].getAid().getY(), player.getX(), player.getY()) < 50) {
+        map[i].freeAid();
+        player.setHealth();
       }
     }
   }
@@ -205,18 +224,14 @@ function takeAid() {
 //Movimiento del personaje y ataque cuerpo a cuerpo
 function keyPressed() {
   for (let j = 0; j < map.length; j++) {
-    for (let u = 0; u < player.length; u++) {
-      player[u].move(map[j].getLevel(), key);
-      for (let i = 0; i < horde.length; i++) {
-        player[u].closeAttack(horde[i], key);
-      }
+    player.move(map[j].getLevel(), key);
+    for (let i = 0; i < horde.length; i++) {
+      player.closeAttack(horde[i], key);
     }
   }
 }
 
 
 function mousePressed() {
-  for (let i = 0; i < player.length; i++) {
-    player[i].shoot(); 
-  }
+  player.shoot();
 }
