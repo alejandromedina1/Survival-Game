@@ -36,7 +36,7 @@ function setup() {
    imgRPR = loadImage("NR_Rifle.png");
  
    //Zombie
-   imgZombie = loadImage ("Zombie.png");
+   imgZombie = loadImage ("ZombieAlas.png");
  
    //Med kit
    imgMedKit = loadImage ("Botiquín.png");
