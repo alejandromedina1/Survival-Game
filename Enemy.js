@@ -7,7 +7,8 @@ class Enemy {
         this.y = (row * 50) + 25;
         this.health = 250;
         this.width = 50;
-        this.height = 80
+        this.height = 80;
+        
     }
 
     show() {
@@ -75,12 +76,10 @@ class Enemy {
         return this.health;
     }
     setHealth(nHealth){
-        this.health = nHealth
+        this.health = nHealth;
     }
-    setWidth(nW){
-        this.width = nW;
-    }
-    setHeight(nH){
-        this.height = nH;
+    
+    updateHealth() {
+        this.health = this.health + 1;
     }
 }

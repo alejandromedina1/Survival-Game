@@ -1,4 +1,6 @@
-//AkaGuille
+/*Guillermo Valencia A00373570
+Alejandro Medina A00371556
+Juan Alejandro Solarte A00372646 */
 let map;
 let player;
 let clue;
@@ -326,6 +328,9 @@ function draw() {
           map.ground(5);
           player.setColumn(12);
           player.setRow(13);
+          horde6.forEach(enemy => {
+          enemy.setHealth(700);
+          });
           screen = 11;
         }
       }
@@ -344,9 +349,7 @@ function draw() {
         medKit.show();
       })
       horde6.forEach(enemy => {
-        enemy.setWidth(100);
-        enemy.setHeight(160);
-        enemy.setHealth(700);
+        enemy.updateHealth();
         enemy.show();
         enemy.move(player);
       });
@@ -390,7 +393,7 @@ function draw() {
   for (let i = 0; i < horde1.length; i++) {
     player.closeAttack(horde6[i]);
   }
-  if (player.getHealth() < 0) {
+  if (player.getHealth() <= 0) {
     screen = 13;
   }
   enemyDie();
