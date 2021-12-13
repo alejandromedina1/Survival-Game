@@ -44,7 +44,7 @@ class Player {
         if (this.takeRifle()) {
             fill(0);
             rect(this.x, this.y, 20, 20);
-            this.inventory[0].show();
+            this.inventory[0].showObj();
         }
         rectMode(CORNER);
         fill(0);

@@ -1,5 +1,5 @@
 //AkaGuille
-let map = [];
+let map;
 let horde = [];
 let player;
 let clue;
@@ -22,19 +22,19 @@ let imgZombie;
 let imgMedKit;
 let imgRifle;
 //Imagenes mapas
-let imgCiudad;
-let imgBarco;
-let imgBosque;
-let imgCarretera;
-let imgCementerio;
-let imgPlaya;
+let imgCity;
+let imgShip;
+let imgForest;
+let imgRoad;
+let imgGraveyard;
+let imgBeach;
 
 //Pistas
-let imgPista1;
-let imgPista2;
-let imgPista3;
-let imgPista4;
-let imgPista5;
+let imgHint1;
+let imgHint2;
+let imgHint3;
+let imgHint4;
+let imgHint5;
 
 function setup() {
   createCanvas(1200, 700);
@@ -64,54 +64,42 @@ function setup() {
   imgRifle = loadImage("AK-47.png");
 
   //Mapas
-  imgCiudad = loadImage("Mapaciudad.png");
-  imgBarco = loadImage("Barco.png");
-  imgBosque = loadImage("Bosque.png");
-  imgCarretera = loadImage("Carretera.png");
-  imgCementerio = loadImage("Cementerio.png");
-  imgPlaya = loadImage("Playa.png");
+  imgCity = loadImage("Mapaciudad.png");
+  imgShip = loadImage("Barco.png");
+  imgForest = loadImage("Bosque.png");
+  imgRoad = loadImage("Carretera.png");
+  imgGraveyard = loadImage("Cementerio.png");
+  imgBeach = loadImage("Playa.png");
 
   //Pistas
-  imgPista1 = loadImage("Pista 1.png");
-  imgPista2 = loadImage("Pista 2.png");
-  imgPista3 = loadImage("Pista 3.png");
-  imgPista4 = loadImage("Pista 4.png");
-  imgPista5 = loadImage("Pista 5.png");
+  imgHint1 = loadImage("Pista 1.png");
+  imgHint2 = loadImage("Pista 2.png");
+  imgHint3 = loadImage("Pista 3.png");
+  imgHint4 = loadImage("Pista 4.png");
+  imgHint5 = loadImage("Pista 5.png");
 
-  map[0] = new Map(imgBarco, 12, 7, 8, 8);
-  map[1] = new Map(imgPlaya);
-  map[2] = new Map(imgCarretera);
-  map[3] = new Map(imgCiudad);
-  map[4] = new Map(imgBosque);
-  map[5] = new Map(imgCementerio);
+  map = new Map(12, 7, 8, 8);
 
   hint = loadImage("Clue.png");
-  clue = new Clue(hint);
+  clue1 = new Clue(590, 430);
+  clue2 = new Clue();
+  clue3 = new Clue();
+  clue4 = new Clue();
+  clue5 = new Clue();
 
   let xP = 21;
   let yP = 7;
   player = new Player(xP, yP, imgFP, imgBP, imgRP, imgLP);
 
-
-  if (map[0]) {
-    for (let i = 0; i < 4; i++) {
-      horde.push(new Enemy(0, 0, imgZombie));
-      horde.push(new Enemy(1, 7, imgZombie));
-      horde.push(new Enemy(1, 14, imgZombie));
-    }
+  for (let i = 0; i < 4; i++) {
+    horde.push(new Enemy(0, 0, imgZombie));
+    horde.push(new Enemy(1, 7, imgZombie));
+    horde.push(new Enemy(1, 14, imgZombie));
   }
-  if (map[1]) {
-    for (let i = 0; i < 4; i++) {
-      this.xP = 21;
-      this.yP = 4
-    }
-  }
-
 }
 
 function draw() {
   background(220);
-  
   switch (screen) {
     case 0: // Pantalla inicial
 
@@ -120,53 +108,87 @@ function draw() {
 
       break;
     case 2: // Nivel 1
-      map[0].ground(0);
-      map[0].show();
+      map.ground(0);
+      map.show();
+      image(imgShip, 600, 350, 1200, 700);
+      map.showObj();
+      player.show();
       horde.forEach(enemy => {
         enemy.show();
         enemy.move(player);
       });
-      if (player.changeLevel(map[0].getLevel()) === true) {
-        screen = 4;
+      if (player.changeLevel(map.getLevel()) === true) {
+        map.ground(1);
+        screen = 3;
       }
-      if (player.showClue(map[0].getLevel()) === true) {
-        clue.show();
+      if (player.showClue(map.getLevel()) === true) {
+        image(hint, 600, 350);
       }
       break;
     case 3: // Pista 1
-
+      image(imgHint1, 600, 350);
+      clue1.selected();
+      clue1.show();
       break;
     case 4: // Nivel 2
-      map[1].ground(1);
-      map[1].show();
+      map.ground(1);
+      map.show();
+      image(imgBeach, 600, 350, 1200, 700);
+      xP = 21;
+      yP = 4;
+      player.show();
+      if (player.changeLevel(map.getLevel()) === true) {
+        map.ground(2);
+        screen = 6;
+      }
       break;
     case 5: // Pista 2
 
       break;
     case 6: // Nivel 3
-      map[2].ground(2);
-      map[2].show();
+      map.ground(2);
+      map.show();
+      image(imgRoad, 600, 350, 1200, 700);
+      player.show();
+      if (player.changeLevel(map.getLevel()) === true) {
+        map.ground(3);
+        screen = 8;
+      }
       break;
     case 7: // Pista 3
 
       break;
     case 8: // Nivel 4
-      map[3].ground(3);
-      map[3].show();
+      map.ground(3);
+      map.show();
+      image(imgCity, 600, 350, 1200, 700);
+      player.show();
+      if (player.changeLevel(map.getLevel()) === true) {
+        map.ground(4);
+        screen = 10;
+      }
       break;
     case 9: // Pista 4
 
       break;
     case 10: // Nivel 5
-      map[4].ground(4);
-      map[4].show();
+      map.ground(4);
+      map.show();
+      image(imgForest, 600, 350, 1200, 700);
+      player.show();
+      if (player.changeLevel(map.getLevel()) === true) {
+        map.ground(5);
+        screen = 12;
+      }
       break;
     case 11: // Pista 5
 
       break;
     case 12: // Nivel 6
-      map[5].ground(5);
-      map[5].show();
+      map.ground(5);
+      map.show();
+      image(imgGraveyard, 600, 350, 1200, 700);
+      player.show();
       break;
     case 13: // Game Over
 
@@ -178,7 +200,6 @@ function draw() {
       screen = 2;
       break;
   }
-  player.show();
   player.hitBox(horde);
   for (let i = 0; i < horde.length; i++) {
     player.closeAttack(horde[i]);
@@ -200,11 +221,9 @@ function enemyDie() {
 
 function takeWeapon() {
   for (let i = 0; i < map.length; i++) {
-    if (map[i].getRifle() !== null) {
-      if (dist(map[i].getRifle().getX(), map[i].getRifle().getY(), player.getX(), player.getY()) < 50) {
-        player.addToInventory(map[i].getRifle());
-        map[i].freeRifle();
-      }
+    if (dist(map.getRifle().getX(), map.getRifle().getY(), player.getX(), player.getY()) < 50) {
+      player.addToInventory(map.getRifle());
+      map.freeRifle();
     }
   }
 }
@@ -212,26 +231,25 @@ function takeWeapon() {
 
 function takeAid() {
   for (let i = 0; i < map.length; i++) {
-    if (map[i].getAid() !== null) {
-      if (dist(map[i].getAid().getX(), map[i].getAid().getY(), player.getX(), player.getY()) < 50) {
-        map[i].freeAid();
-        player.setHealth();
-      }
+    if (dist(map.getAid().getX(), map.getAid().getY(), player.getX(), player.getY()) < 50) {
+      map.freeAid();
+      player.setHealth();
     }
   }
 }
 
 //Movimiento del personaje y ataque cuerpo a cuerpo
 function keyPressed() {
-  for (let j = 0; j < map.length; j++) {
-    player.move(map[j].getLevel(), key);
-    for (let i = 0; i < horde.length; i++) {
-      player.closeAttack(horde[i], key);
-    }
+  player.move(map.getLevel(), key);
+  for (let i = 0; i < horde.length; i++) {
+    player.closeAttack(horde[i], key);
   }
 }
 
 
 function mousePressed() {
   player.shoot();
+  if (clue1.selected()) {
+    screen = 4;
+  }
 }

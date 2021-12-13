@@ -1,7 +1,6 @@
 class Map {
-    constructor(image,xR,yR,xA,yA) {
+    constructor(xR,yR,xA,yA) {
         this.level = [];
-        this.image = image;
         this.xR = xR;
         this.yR = yR;
         this.xA = xA;
@@ -11,7 +10,6 @@ class Map {
     }
     //Metodo para pintar
     show() {
-        
         for (let row = 0; row < 14; row++) {
             for (let column = 0; column < 24; column++) {
                 if (this.level[row][column] !== 1) {
@@ -22,9 +20,9 @@ class Map {
                 rect(column * 50, row * 50, 50, 50);
             }
         }
-        //imageMode(CENTER);
-        //image(this.image, 600, 350, 1200, 700);
-        //imageMode(CORNER);
+    }
+
+    showObj(){
         if (this.rifle !== null) {
             this.rifle.show()
         }
@@ -87,7 +85,7 @@ class Map {
                     [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 2],
                 ];
                 break;
                 case 3: //Nivel 4 ciudad
