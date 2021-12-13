@@ -36,6 +36,10 @@ let imgHint3;
 let imgHint4;
 let imgHint5;
 
+// Menús
+let mainMenu;
+let instructionMenu;
+
 function setup() {
   createCanvas(1200, 700);
   //Base player images
@@ -78,6 +82,9 @@ function setup() {
   imgHint4 = loadImage("Pista 4.png");
   imgHint5 = loadImage("Pista 5.png");
 
+  //Menus
+  mainMenu = loadImage()
+
   map = new Map(12, 7, 8, 8);
 
   hint = loadImage("Clue.png");
@@ -118,6 +125,8 @@ function draw() {
       });
       if (player.changeLevel(map.getLevel()) === true) {
         map.ground(1);
+        player.setColumn(20);
+        player.setRow(6);
         screen = 3;
       }
       if (player.showClue(map.getLevel()) === true) {
@@ -133,11 +142,12 @@ function draw() {
       map.ground(1);
       map.show();
       image(imgBeach, 600, 350, 1200, 700);
+      player.updateCoords();
       player.show();
-      player.setColumn(20);
-      player.setRow(6);
       if (player.changeLevel(map.getLevel()) === true) {
         map.ground(2);
+        player.setColumn(21);
+        player.setRow(1);
         screen = 5;
       }
       break;
@@ -150,6 +160,7 @@ function draw() {
       map.ground(2);
       map.show();
       image(imgRoad, 600, 350, 1200, 700);
+      player.updateCoords();
       player.show();
       if (player.changeLevel(map.getLevel()) === true) {
         map.ground(3);
