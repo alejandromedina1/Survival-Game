@@ -126,7 +126,7 @@ function draw() {
       if (player.changeLevel(map.getLevel()) === true) {
         map.ground(1);
         player.setColumn(20);
-        player.setRow(6);
+        player.setRow(4);
         screen = 3;
       }
       if (player.showClue(map.getLevel()) === true) {
@@ -146,8 +146,8 @@ function draw() {
       player.show();
       if (player.changeLevel(map.getLevel()) === true) {
         map.ground(2);
-        player.setColumn(21);
-        player.setRow(1);
+        player.setColumn(2);
+        player.setRow(3);
         screen = 5;
       }
       break;
@@ -164,6 +164,8 @@ function draw() {
       player.show();
       if (player.changeLevel(map.getLevel()) === true) {
         map.ground(3);
+        player.setColumn(0);
+        player.setRow(8);
         screen = 7;
       }
       break;
@@ -176,9 +178,12 @@ function draw() {
       map.ground(3);
       map.show();
       image(imgCity, 600, 350, 1200, 700);
+      player.updateCoords();
       player.show();
       if (player.changeLevel(map.getLevel()) === true) {
         map.ground(4);
+        player.setColumn(0);
+        player.setRow(7);
         screen = 9;
       }
       break;
@@ -191,9 +196,12 @@ function draw() {
       map.ground(4);
       map.show();
       image(imgForest, 600, 350, 1200, 700);
+      player.updateCoords();
       player.show();
       if (player.changeLevel(map.getLevel()) === true) {
         map.ground(5);
+        player.setColumn(12);
+        player.setRow(13);
         screen = 11;
       }
       break;
