@@ -432,21 +432,32 @@ function keyPressed() {
 
 function mousePressed() {
   player.shoot();
-  if (clue1.selected()) {
-    screen = 4;
+  if (screen === 3) {
+    if (clue1.selected()) {
+      screen = 4;
+    }
   }
-  if (clue2.selected()) {
-    screen = 6;
+  if (screen === 5) {
+    if (clue2.selected()) {
+      screen = 6;
+    }
   }
-  if (clue3.selected()) {
-    screen = 8;
+  if (screen === 7) {
+    if (clue3.selected()) {
+      screen = 8;
+    }
   }
-  if (clue4.selected()) {
-    screen = 10;
+  if (screen === 9) {
+    if (clue4.selected()) {
+      screen = 10;
+    }
   }
-  if (clue5.selected()) {
-    screen = 12;
+  if (screen === 11) {
+    if (clue5.selected()) {
+      screen = 12;
+    }
   }
+
   if (screen === 0) {
     if (473 < mouseX && mouseX < 723 && 501 < mouseY && mouseY < 555) {
       screen = 2;
@@ -454,40 +465,20 @@ function mousePressed() {
     if (473 < mouseX && mouseX < 723 && 568 < mouseY && mouseY < 622) {
       screen = 1;
     }
-  } 
+  }
   if (screen === 1) {
     if (818 < mouseX && mouseX < 1116 && 535 < mouseY && mouseY < 620) {
       screen = 2;
     }
   }
-  if (screen === 13) {
-    if (400 < mouseX && mouseX < 800 && 400 < mouseY && mouseY < 500) {
-      for (let i = 0; i < horde.length; i++) {
-        screen = 2;
-        horde[i].setColumn(0);
-        horde[0].setRow(1);
-        horde[1].setRow(7);
-        horde[2].setRow(14);
-        horde[i].setHealth(250);
-      }
-      player.setHealth(100);
-      player.setColumn(21);
-      player.setRow(7);
-    }
-  }
   if (screen === 14) {
     if (200 < mouseX && mouseX < 600 && 350 < mouseY && mouseY < 450) {
       screen = 2;
-      player.setHealth(100);
-      player.setColumn(21);
-      player.setRow(7);
-      for (let i = 0; i < horde.length; i++) {
-        horde[i].setColumn(0);
-        horde[0].setRow(1);
-        horde[1].setRow(7);
-        horde[2].setRow(14);
-        horde[i].setHealth(250);
-      }
+    }
+  }
+  if (screen === 13) {
+    if (400 < mouseX && mouseX < 800 && 400 < mouseY && mouseY < 500) {
+      screen = 2;
     }
   }
 }
