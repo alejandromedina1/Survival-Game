@@ -1,38 +1,62 @@
 class Player {
-    constructor(column, row, imgFront, imgBackward, imgRight, imgLeft) {
+    constructor(column, row, imgFront, imgBackward, imgRight, imgLeft, imgFrontR, imgRightR, imgLeftR, imgClub) {
         this.row = row;
         this.column = column;
         this.imgFront = imgFront;
         this.imgBackward = imgBackward;
         this.imgRight = imgRight;
         this.imgLeft = imgLeft;
+
+        this.imgFrontR = imgFrontR;
+        this.imgRightR = imgRightR;
+        this.imgLeftR = imgLeftR;
+        this.imgClub = imgClub;
         this.x = (column * 50) + 25;
         this.y = (row * 50) + 25;
         this.inventory = [];
         this.health = 100;
     }
     show() {
-        imageMode(CENTER); 
+        imageMode(CENTER);
         switch (key) {
             case 'a' || 'A': //Lateral izquierda
                 this.x = (this.column * 50) + 25; //
                 this.y = (this.row * 50) + 25;
-                image(this.imgLeft, this.x, this.y, 37, 50);
+                if (this.takeRifle() === false) {
+                    image(this.imgLeft, this.x, this.y, 37, 50);
+                } else {
+                    image(this.imgLeftR, this.x, this.y, 40, 50);
+                }
+
                 break;
             case 'w' || 'W': // Trasera
                 this.x = (this.column * 50) + 25; //
                 this.y = (this.row * 50) + 25;
                 image(this.imgBackward, this.x, this.y, 37, 50);
+
                 break;
             case 'd' || 'D': //Lateral derecha
                 this.x = (this.column * 50) + 25; //
                 this.y = (this.row * 50) + 25;
-                image(this.imgRight, this.x, this.y, 37, 50);
+                if (this.takeRifle() === false) {
+                    image(this.imgRight, this.x, this.y, 37, 50);
+                } else {
+                    image(this.imgRightR, this.x, this.y, 40, 50);
+                }
+
                 break;
             case 's' || 'S': //Frontal
                 this.x = (this.column * 50) + 25; //
                 this.y = (this.row * 50) + 25;
-                image(this.imgFront, this.x, this.y, 37, 50);
+                if (this.takeRifle() === false) {
+                    image(this.imgFront, this.x, this.y, 37, 50);
+                } else {
+                    image(this.imgFrontR, this.x, this.y, 37, 50);
+                }
+                break;
+            case 'q' || 'Q': // Bolillazo
+                image(this.imgClub, this.x, this.y, 37, 50);
+
                 break;
             default:
                 image(this.imgFront, this.x, this.y, 37, 50);
@@ -40,10 +64,9 @@ class Player {
         }
         this.move();
         fill(255);
+
         rectMode(CENTER);
         if (this.takeRifle()) {
-            fill(0);
-            rect(this.x, this.y, 20, 20);
             this.inventory[0].show();
         }
         rectMode(CORNER);
@@ -66,8 +89,8 @@ class Player {
         let active = false;
         if (key === 'q' || key === 'Q') {
             active = true
-            if (active === true && dist(this.x, this.y, enemy.getX(), enemy.getY()) < 100) {
-                enemy.hurt(500);
+            if (active === true && dist(this.x, this.y, enemy.getX(), enemy.getY()) < 75) {
+                enemy.hurt(50);
                 active = false;
             }
             active = false;
@@ -124,14 +147,14 @@ class Player {
         this.y = (this.row * 50) + 25;
     }
 
-    changeLevel(mapReference){
-        if (mapReference [this.row][this.column] === 2) {
+    changeLevel(mapReference) {
+        if (mapReference[this.row][this.column] === 2) {
             return true;
         }
     }
 
-    showClue(mapReference){
-        if (mapReference [this.row][this.column] === 3) {
+    showClue(mapReference) {
+        if (mapReference[this.row][this.column] === 3) {
             return true;
         }
     }
@@ -144,7 +167,7 @@ class Player {
         for (let i = 0; i < enemy.length; i++) {
             if (dist(this.x, this.y, enemy[i].getX(), enemy[i].getY()) < 25) {
                 if (frameCount % 60 === 0) {
-                    this.hurt(5);   
+                    this.hurt(20);
                 }
             }
         }
@@ -161,10 +184,10 @@ class Player {
     getColumn() {
         return this.column;
     }
-    setRow(nRow){
+    setRow(nRow) {
         this.row = nRow;
     }
-    setColumn(nColumn){
+    setColumn(nColumn) {
         this.column = nColumn;
     }
     getInventory() {

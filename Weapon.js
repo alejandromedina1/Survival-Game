@@ -1,18 +1,17 @@
 class Weapon {
-    constructor(column, row) {
+    constructor(column, row, akImg) {
         this.row = row;
         this.column = column;
         this.x = (column * 50) + 25;
         this.y = (row * 50) + 25;
         this.ammo = []
+        this.akImg = akImg;
+        this.width = 50;
+        this.height = 25;
     }
 
     show() {
-        rectMode(CENTER);
-        fill(0);
-        rect(this.x, this.y, 20, 20);
-        fill(255);
-        rectMode(CORNER);
+       image(this.akImg, this.x, this.y, this.width, this.height);
         for (let i = 0; i < this.ammo.length; i++) {
             const bullet = this.ammo[i];
             bullet.show();
@@ -35,6 +34,14 @@ class Weapon {
 
     getY() {
         return this.y;
+    }
+
+    setWidth(nW){
+        this.width = nW;
+    }
+
+    setHeight(nH){
+        this.height = nH;
     }
 
     updatePos(nx, ny) {

@@ -1,12 +1,6 @@
 class Map {
-    constructor(xR,yR,xA,yA) {
+    constructor() {
         this.level = [];
-        this.xR = xR;
-        this.yR = yR;
-        this.xA = xA;
-        this.yA = yA;
-        this.rifle = new Weapon(xR, yR);
-        this.aid = new Aid(xA,yA);
     }
     //Metodo para pintar
     show() {
@@ -22,14 +16,6 @@ class Map {
         }
     }
 
-    showObj(){
-        if (this.rifle !== null) {
-            this.rifle.show()
-        }
-        if (this.aid !== null) {
-            this.aid.show();
-        }
-    }
     // Cambios de nivel
     ground(change){
         switch (change) {
@@ -146,23 +132,11 @@ class Map {
                 break;
         }
     }
-    
+
     getLocation(newColumn, newRow){
         return this.level[newColumn][newRow];
     }
     getLevel() {
         return this.level;
-    }
-    getRifle() {
-        return this.rifle;
-    }
-    getAid() {
-        return this.aid;
-    }
-    freeRifle() {
-        this.rifle = null;
-    }
-    freeAid() {
-        this.aid = null;
     }
 }

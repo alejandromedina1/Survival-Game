@@ -2,6 +2,15 @@
 let map;
 let player;
 let clue;
+let weapon = [];
+let aid1 = [];
+let aid2 = [];
+let aid3 = [];
+let aid4 = [];
+let aid5 = [];
+let aid6 = [];
+
+let ak47;
 //Zombies
 let horde1 = [];
 let horde2 = [];
@@ -84,7 +93,7 @@ function setup() {
   imgMedKit = loadImage("Botiquín.png");
 
   //Rifle
-  imgRifle = loadImage("AK-47.png");
+  ak47 = loadImage ("AK-47.png");
 
   //Maps
   imgCity = loadImage("Mapaciudad.png");
@@ -107,7 +116,24 @@ function setup() {
   victoryMenu = loadImage("Victory.jpg");
   gameOverMenu = loadImage("Game Over.jpg");
 
-  map = new Map(12, 7, 8, 8);
+  map = new Map();
+
+  weapon [0]= new Weapon(15, 5, ak47);
+
+  aid1 [0] = new Aid(12,7, imgMedKit);
+  aid2 [0] = new Aid(5,13, imgMedKit);
+  aid3 [0] = new Aid(12,7, imgMedKit);
+  aid3 [1] = new Aid(1,13, imgMedKit);
+  aid4 [0] = new Aid(3,13, imgMedKit);
+  aid4 [1] = new Aid(22,12, imgMedKit);
+  aid4 [2] = new Aid(12,7, imgMedKit);
+  aid5 [0] = new Aid(12,7, imgMedKit);
+  aid5 [1] = new Aid(12,2, imgMedKit);
+  aid5 [2] = new Aid(13,10, imgMedKit);
+  aid6 [0] = new Aid(5,7, imgMedKit);
+  aid6 [1] = new Aid(10,7, imgMedKit);
+  aid6 [2] = new Aid(16,7, imgMedKit);
+  
 
   hint = loadImage("Clue.png");
   clue1 = new Clue(590, 430);
@@ -117,7 +143,7 @@ function setup() {
   clue5 = new Clue(720, 434);
 
 
-  player = new Player(21, 7, imgFP, imgBP, imgRP, imgLP);
+  player = new Player(21, 7, imgFP, imgBP, imgRP, imgLP, imgFPR, imgRPR, imgLPR, imgLPB);
 
   horde1.push(new Enemy(0, 0, imgZombie1));
   horde1.push(new Enemy(0, 7, imgZombie1));
@@ -173,8 +199,10 @@ function draw() {
       for (let i = 0; i < horde1.length; i++) {
         horde1[i].updateCoords();
       }
-      map.showObj();
       player.show();
+      aid1.forEach(medKit =>{
+        medKit.show();
+      })
       horde1.forEach(enemy => {
         enemy.show();
         enemy.move(player);
@@ -202,6 +230,12 @@ function draw() {
       image(imgBeach, 600, 350, 1200, 700);
       player.updateCoords();
       player.show();
+      aid2.forEach(medKit =>{
+        medKit.show();
+      })
+      weapon.forEach(rifle =>{
+        rifle.show();
+      })
       horde2.forEach(enemy => {
         enemy.show();
         enemy.move(player);
@@ -226,6 +260,9 @@ function draw() {
       image(imgRoad, 600, 350, 1200, 700);
       player.updateCoords();
       player.show();
+      aid3.forEach(medKit =>{
+        medKit.show();
+      })
       horde3.forEach(enemy => {
         enemy.show();
         enemy.move(player);
@@ -250,6 +287,9 @@ function draw() {
       image(imgCity, 600, 350, 1200, 700);
       player.updateCoords();
       player.show();
+      aid4.forEach(medKit =>{
+        medKit.show();
+      })
       horde4.forEach(enemy => {
         enemy.show();
         enemy.move(player);
@@ -274,6 +314,9 @@ function draw() {
       image(imgForest, 600, 350, 1200, 700);
       player.updateCoords();
       player.show();
+      aid5.forEach(medKit =>{
+        medKit.show();
+      })
       horde5.forEach(enemy => {
         enemy.show();
         enemy.move(player);
@@ -297,7 +340,13 @@ function draw() {
       map.show();
       image(imgGraveyard, 600, 350, 1200, 700);
       player.show();
+      aid6.forEach(medKit =>{
+        medKit.show();
+      })
       horde6.forEach(enemy => {
+        enemy.setWidth(100);
+        enemy.setHeight(160);
+        enemy.setHealth(700);
         enemy.show();
         enemy.move(player);
       });
@@ -315,6 +364,8 @@ function draw() {
       screen = 0;
       break;
   }
+  takeAid();
+  takeRifle();
   player.hitBox(horde1);
   player.hitBox(horde2);
   player.hitBox(horde3);
@@ -342,9 +393,70 @@ function draw() {
   if (player.getHealth() < 0) {
     screen = 13;
   }
-  takeWeapon();
-  takeAid();
   enemyDie();
+}
+
+function takeRifle(){
+  if (screen === 4) {
+    for (let i = 0; i < weapon.length; i++) {
+      if (dist(weapon[i].getX(), weapon[i].getY(), player.getX(), player.getY())< 50) {
+        player.addToInventory(weapon[0]);
+        weapon[i].setWidth(1);
+        weapon[i].setHeight(1);
+      } 
+    }
+  }
+}
+
+function takeAid(){
+  if (screen === 2) {
+    for (let i = 0; i < aid1.length; i++) {
+      if (dist(aid1[i].getX(), aid1[i].getY(), player.getX(), player.getY())< 50) {
+        aid1.splice(i,1);
+        player.setHealth(player.getHealth()+100);
+      }
+    }
+  }
+  if (screen === 4) {
+    for (let i = 0; i < aid2.length; i++) {
+      if (dist(aid2[i].getX(), aid2[i].getY(), player.getX(), player.getY())< 50) {
+        aid2.splice(i,1);
+        player.setHealth(player.getHealth()+100);
+      }
+    }
+  }
+  if (screen === 6) {
+    for (let i = 0; i < aid3.length; i++) {
+      if (dist(aid3[i].getX(), aid3[i].getY(), player.getX(), player.getY())< 50) {
+        aid3.splice(i,1);
+        player.setHealth(player.getHealth()+100);
+      }
+    } 
+  }
+  if (screen === 8) {
+    for (let i = 0; i < aid4.length; i++) {
+      if (dist(aid4[i].getX(), aid4[i].getY(), player.getX(), player.getY())< 50) {
+        aid4.splice(i,1);
+        player.setHealth(player.getHealth()+100);
+      }
+    }
+  }
+  if (screen === 10) {
+    for (let i = 0; i < aid5.length; i++) {
+      if (dist(aid5[i].getX(), aid5[i].getY(), player.getX(), player.getY())< 50) {
+        aid5.splice(i,1);
+        player.setHealth(player.getHealth()+100);
+      }
+    } 
+  }
+  if (screen === 12) {
+    for (let i = 0; i < aid6.length; i++) {
+      if (dist(aid6[i].getX(), aid6[i].getY(), player.getX(), player.getY())< 50) {
+        aid6.splice(i,1);
+        player.setHealth(player.getHealth()+100);
+      }
+    } 
+  }
 }
 
 function enemyDie() {
@@ -382,26 +494,6 @@ function enemyDie() {
     horde6[i].hitBox(player);
     if (horde6[i] !== undefined && horde6[i].getHealth() <= 0) {
       horde6.splice(i, 1);
-    }
-  }
-}
-
-
-function takeWeapon() {
-  for (let i = 0; i < map.length; i++) {
-    if (dist(map.getRifle().getX(), map.getRifle().getY(), player.getX(), player.getY()) < 50) {
-      player.addToInventory(map.getRifle());
-      map.freeRifle();
-    }
-  }
-}
-
-
-function takeAid() {
-  for (let i = 0; i < map.length; i++) {
-    if (dist(map.getAid().getX(), map.getAid().getY(), player.getX(), player.getY()) < 50) {
-      map.freeAid();
-      player.setHealth(player.getHealth() + 100);
     }
   }
 }
@@ -473,12 +565,12 @@ function mousePressed() {
   }
   if (screen === 14) {
     if (200 < mouseX && mouseX < 600 && 350 < mouseY && mouseY < 450) {
-      screen = 2;
+      location.reload();
     }
   }
   if (screen === 13) {
     if (400 < mouseX && mouseX < 800 && 400 < mouseY && mouseY < 500) {
-      screen = 2;
+      location.reload();
     }
   }
 }

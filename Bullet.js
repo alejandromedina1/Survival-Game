@@ -7,7 +7,7 @@ class Bullet {
     }
 
     show() {
-        fill(0, 255, 0);
+        fill(0);
         noStroke();
         circle(this.x, this.y, this.diameter);
         fill(255);

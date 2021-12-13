@@ -6,11 +6,13 @@ class Enemy {
         this.x = (column * 50) + 25;
         this.y = (row * 50) + 25;
         this.health = 250;
+        this.width = 50;
+        this.height = 80
     }
 
     show() {
         imageMode(CENTER);
-        image(this.zombieImg, this.x, this.y, 50, 80);
+        image(this.zombieImg, this.x, this.y, this.width, this.height);
         fill(0);
         text(this.health, this.x - 10, this.y - 45);
         fill(255);
@@ -45,7 +47,7 @@ class Enemy {
                 let bullets = rifleReference.getAmmo();
                 bullets.forEach(bullet => {
                     if (bullet.getActive() && dist(this.x, this.y, bullet.getX(), bullet.getY()) <= 35) {
-                        this.hurt(10);
+                        this.hurt(50);
                     }
                 });
             }
@@ -74,5 +76,11 @@ class Enemy {
     }
     setHealth(nHealth){
         this.health = nHealth
+    }
+    setWidth(nW){
+        this.width = nW;
+    }
+    setHeight(nH){
+        this.height = nH;
     }
 }

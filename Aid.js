@@ -1,15 +1,16 @@
 class Aid{
-    constructor(row, column) {
+    constructor(column, row, imgMedKit) {
         this.row = row;
         this.column = column;
         this.x = (column * 50) + 25;
         this.y = (row * 50) + 25;
+        this.imgMedKit = imgMedKit;
     }
 
     show() {
         rectMode(CENTER);
         fill(0, 255, 0);
-        rect(this.x, this.y, 20, 20);
+        image(this.imgMedKit, this.x, this.y, 50, 50);
         fill(255);
         rectMode(CORNER);
     }
