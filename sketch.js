@@ -1,8 +1,14 @@
 //AkaGuille
 let map;
-let horde = [];
 let player;
 let clue;
+//Zombies
+let horde1 = [];
+let horde2 = [];
+let horde3 = [];
+let horde4 = [];
+let horde5 = [];
+let horde6 = [];
 
 //Level 1 clue (treasure)
 let hint;
@@ -113,74 +119,73 @@ function setup() {
 
   player = new Player(21, 7, imgFP, imgBP, imgRP, imgLP);
 
-  if (screen = 2) {
-    horde.push(new Enemy(0, 0, imgZombie1));
-    horde.push(new Enemy(0, 7, imgZombie1));
-    horde.push(new Enemy(0, 14, imgZombie1));
-  }
-  if (screen = 4) {
-    horde.push(new Enemy(0, 3, imgZombie1));
-    horde.push(new Enemy(0, 7, imgZombie1));
-    horde.push(new Enemy(12, 14, imgZombie1));
-    horde.push(new Enemy(23, 14, imgZombie1));
-  }
-  if (screen = 6) {
-    horde.push(new Enemy(23, 3, imgZombie2));
-    horde.push(new Enemy(23, 7, imgZombie2));
-    horde.push(new Enemy(12, 14, imgZombie2));
-    horde.push(new Enemy(0, 14, imgZombie2));
-  }
-  if (screen = 8) {
-    horde.push(new Enemy(12, 0, imgZombie3));
-    horde.push(new Enemy(24, 0, imgZombie3));
-    horde.push(new Enemy(24, 7, imgZombie3));
-    horde.push(new Enemy(24, 14, imgZombie3));
-    horde.push(new Enemy(12, 14, imgZombie3));
-    horde.push(new Enemy(12, 7, imgZombie3));
-  }
-  if (screen = 10) {
-    horde.push(new Enemy(12, 0, imgZombie4));
-    horde.push(new Enemy(24, 0, imgZombie4));
-    horde.push(new Enemy(24, 7, imgZombie4));
-    horde.push(new Enemy(24, 14, imgZombie4));
-    horde.push(new Enemy(12, 14, imgZombie4));
-    horde.push(new Enemy(12, 9, imgZombie4));
-    horde.push(new Enemy(12, 5, imgZombie4));
-  }
-  if (screen = 12) {
-    horde.push(new Enemy(12, 0, imgZombie5));
-    horde.push(new Enemy(24, 0, imgZombie5));
-  }
+  horde1.push(new Enemy(0, 0, imgZombie1));
+  horde1.push(new Enemy(0, 7, imgZombie1));
+  horde1.push(new Enemy(0, 14, imgZombie1));
+
+  horde2.push(new Enemy(0, 3, imgZombie1));
+  horde2.push(new Enemy(0, 7, imgZombie1));
+  horde2.push(new Enemy(12, 14, imgZombie1));
+  horde2.push(new Enemy(23, 14, imgZombie1));
+
+  horde3.push(new Enemy(23, 3, imgZombie2));
+  horde3.push(new Enemy(23, 7, imgZombie2));
+  horde3.push(new Enemy(12, 14, imgZombie2));
+  horde3.push(new Enemy(0, 14, imgZombie2));
+
+  horde4.push(new Enemy(12, 0, imgZombie3));
+  horde4.push(new Enemy(24, 0, imgZombie3));
+  horde4.push(new Enemy(24, 7, imgZombie3));
+  horde4.push(new Enemy(24, 14, imgZombie3));
+  horde4.push(new Enemy(12, 14, imgZombie3));
+  horde4.push(new Enemy(12, 7, imgZombie3));
+
+  horde5.push(new Enemy(12, 0, imgZombie4));
+  horde5.push(new Enemy(24, 0, imgZombie4));
+  horde5.push(new Enemy(24, 7, imgZombie4));
+  horde5.push(new Enemy(24, 14, imgZombie4));
+  horde5.push(new Enemy(12, 14, imgZombie4));
+  horde5.push(new Enemy(12, 9, imgZombie4));
+  horde5.push(new Enemy(12, 5, imgZombie4));
+
+  horde6.push(new Enemy(12, 0, imgZombie5));
+  horde6.push(new Enemy(24, 0, imgZombie5));
 }
 
 function draw() {
   background(220);
   switch (screen) {
     case 0: // Pantalla inicial
+      imageMode(CENTER);
       image(mainMenu, 600, 350, 1200, 700);
+      imageMode(CORNER);
       break;
     case 1: // Instrucciones
+      imageMode(CENTER);
       image(instructionMenu, 600, 350, 1200, 700);
+      imageMode(CORNER);
       break;
     case 2: // Nivel 1
       map.ground(0);
       map.show();
       image(imgShip, 600, 350, 1200, 700);
       player.updateCoords();
-      for (let i = 0; i < horde.length; i++) {
-        horde[i].updateCoords();
+      for (let i = 0; i < horde1.length; i++) {
+        horde1[i].updateCoords();
       }
       map.showObj();
       player.show();
-      horde.forEach(enemy => {
+      horde1.forEach(enemy => {
         enemy.show();
         enemy.move(player);
       });
-      if (player.changeLevel(map.getLevel()) === true) {
-        map.ground(1);
-        player.setColumn(20);
-        player.setRow(4);
-        screen = 3;
+      if (horde1.length === 0) {
+        if (player.changeLevel(map.getLevel()) === true) {
+          map.ground(1);
+          player.setColumn(20);
+          player.setRow(4);
+          screen = 3;
+        }
       }
       if (player.showClue(map.getLevel()) === true) {
         image(hint, 600, 350);
@@ -197,11 +202,17 @@ function draw() {
       image(imgBeach, 600, 350, 1200, 700);
       player.updateCoords();
       player.show();
-      if (player.changeLevel(map.getLevel()) === true) {
-        map.ground(2);
-        player.setColumn(2);
-        player.setRow(3);
-        screen = 5;
+      horde2.forEach(enemy => {
+        enemy.show();
+        enemy.move(player);
+      });
+      if (horde2.length === 0) {
+        if (player.changeLevel(map.getLevel()) === true) {
+          map.ground(2);
+          player.setColumn(2);
+          player.setRow(3);
+          screen = 5;
+        }
       }
       break;
     case 5: // Pista 2
@@ -215,11 +226,17 @@ function draw() {
       image(imgRoad, 600, 350, 1200, 700);
       player.updateCoords();
       player.show();
-      if (player.changeLevel(map.getLevel()) === true) {
-        map.ground(3);
-        player.setColumn(0);
-        player.setRow(8);
-        screen = 7;
+      horde3.forEach(enemy => {
+        enemy.show();
+        enemy.move(player);
+      });
+      if (horde3.length === 0) {
+        if (player.changeLevel(map.getLevel()) === true) {
+          map.ground(3);
+          player.setColumn(0);
+          player.setRow(8);
+          screen = 7;
+        }
       }
       break;
     case 7: // Pista 3
@@ -233,11 +250,17 @@ function draw() {
       image(imgCity, 600, 350, 1200, 700);
       player.updateCoords();
       player.show();
-      if (player.changeLevel(map.getLevel()) === true) {
-        map.ground(4);
-        player.setColumn(0);
-        player.setRow(7);
-        screen = 9;
+      horde4.forEach(enemy => {
+        enemy.show();
+        enemy.move(player);
+      });
+      if (horde4.length === 0) {
+        if (player.changeLevel(map.getLevel()) === true) {
+          map.ground(4);
+          player.setColumn(0);
+          player.setRow(7);
+          screen = 9;
+        }
       }
       break;
     case 9: // Pista 4
@@ -251,11 +274,17 @@ function draw() {
       image(imgForest, 600, 350, 1200, 700);
       player.updateCoords();
       player.show();
-      if (player.changeLevel(map.getLevel()) === true) {
-        map.ground(5);
-        player.setColumn(12);
-        player.setRow(13);
-        screen = 11;
+      horde5.forEach(enemy => {
+        enemy.show();
+        enemy.move(player);
+      });
+      if (horde5.length === 0) {
+        if (player.changeLevel(map.getLevel()) === true) {
+          map.ground(5);
+          player.setColumn(12);
+          player.setRow(13);
+          screen = 11;
+        }
       }
       break;
     case 11: // Pista 5
@@ -268,6 +297,13 @@ function draw() {
       map.show();
       image(imgGraveyard, 600, 350, 1200, 700);
       player.show();
+      horde6.forEach(enemy => {
+        enemy.show();
+        enemy.move(player);
+      });
+      if (horde6.length === 0) {
+        screen = 14;
+      }
       break;
     case 13: // Game Over
       image(gameOverMenu, 600, 350, 1200, 700);
@@ -276,12 +312,32 @@ function draw() {
       image(victoryMenu, 600, 350, 1200, 700);
       break;
     default:
-      screen = 2;
+      screen = 0;
       break;
   }
-  player.hitBox(horde, screen);
-  for (let i = 0; i < horde.length; i++) {
-    player.closeAttack(horde[i]);
+  player.hitBox(horde1);
+  player.hitBox(horde2);
+  player.hitBox(horde3);
+  player.hitBox(horde4);
+  player.hitBox(horde5);
+  player.hitBox(horde6);
+  for (let i = 0; i < horde1.length; i++) {
+    player.closeAttack(horde1[i]);
+  }
+  for (let i = 0; i < horde1.length; i++) {
+    player.closeAttack(horde2[i]);
+  }
+  for (let i = 0; i < horde1.length; i++) {
+    player.closeAttack(horde3[i]);
+  }
+  for (let i = 0; i < horde1.length; i++) {
+    player.closeAttack(horde4[i]);
+  }
+  for (let i = 0; i < horde1.length; i++) {
+    player.closeAttack(horde5[i]);
+  }
+  for (let i = 0; i < horde1.length; i++) {
+    player.closeAttack(horde6[i]);
   }
   if (player.getHealth() < 0) {
     screen = 13;
@@ -292,10 +348,40 @@ function draw() {
 }
 
 function enemyDie() {
-  for (let i = 0; i < horde.length; i++) {
-    horde[i].hitBox(player);
-    if (horde[i] !== undefined && horde[i].getHealth() <= 0) {
-      horde.splice(i, 1);
+  for (let i = 0; i < horde1.length; i++) {
+    horde1[i].hitBox(player);
+    if (horde1[i] !== undefined && horde1[i].getHealth() <= 0) {
+      horde1.splice(i, 1);
+    }
+  }
+  for (let i = 0; i < horde2.length; i++) {
+    horde2[i].hitBox(player);
+    if (horde2[i] !== undefined && horde2[i].getHealth() <= 0) {
+      horde2.splice(i, 1);
+    }
+  }
+  for (let i = 0; i < horde3.length; i++) {
+    horde3[i].hitBox(player);
+    if (horde3[i] !== undefined && horde3[i].getHealth() <= 0) {
+      horde3.splice(i, 1);
+    }
+  }
+  for (let i = 0; i < horde4.length; i++) {
+    horde4[i].hitBox(player);
+    if (horde4[i] !== undefined && horde4[i].getHealth() <= 0) {
+      horde4.splice(i, 1);
+    }
+  }
+  for (let i = 0; i < horde5.length; i++) {
+    horde5[i].hitBox(player);
+    if (horde5[i] !== undefined && horde5[i].getHealth() <= 0) {
+      horde5.splice(i, 1);
+    }
+  }
+  for (let i = 0; i < horde6.length; i++) {
+    horde6[i].hitBox(player);
+    if (horde6[i] !== undefined && horde6[i].getHealth() <= 0) {
+      horde6.splice(i, 1);
     }
   }
 }
@@ -323,8 +409,23 @@ function takeAid() {
 //Movimiento del personaje y ataque cuerpo a cuerpo
 function keyPressed() {
   player.move(map.getLevel(), key);
-  for (let i = 0; i < horde.length; i++) {
-    player.closeAttack(horde[i], key);
+  for (let i = 0; i < horde1.length; i++) {
+    player.closeAttack(horde1[i], key);
+  }
+  for (let i = 0; i < horde2.length; i++) {
+    player.closeAttack(horde2[i], key);
+  }
+  for (let i = 0; i < horde3.length; i++) {
+    player.closeAttack(horde3[i], key);
+  }
+  for (let i = 0; i < horde4.length; i++) {
+    player.closeAttack(horde4[i], key);
+  }
+  for (let i = 0; i < horde5.length; i++) {
+    player.closeAttack(horde5[i], key);
+  }
+  for (let i = 0; i < horde6.length; i++) {
+    player.closeAttack(horde6[i], key);
   }
 }
 
@@ -345,6 +446,19 @@ function mousePressed() {
   }
   if (clue5.selected()) {
     screen = 12;
+  }
+  if (screen === 0) {
+    if (473 < mouseX && mouseX < 723 && 501 < mouseY && mouseY < 555) {
+      screen = 2;
+    }
+    if (473 < mouseX && mouseX < 723 && 568 < mouseY && mouseY < 622) {
+      screen = 1;
+    }
+  } 
+  if (screen === 1) {
+    if (579 < mouseX && mouseX < 877 && 535 < mouseY && mouseY < 620) {
+      screen = 2;
+    }
   }
   if (screen === 13) {
     if (400 < mouseX && mouseX < 800 && 400 < mouseY && mouseY < 500) {
