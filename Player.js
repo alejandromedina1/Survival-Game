@@ -66,8 +66,8 @@ class Player {
         let active = false;
         if (key === 'q' || key === 'Q') {
             active = true
-            if (active === true && dist(this.x, this.y, enemy.getX(), enemy.getY()) < 75) {
-                enemy.hurt(50);
+            if (active === true && dist(this.x, this.y, enemy.getX(), enemy.getY()) < 100) {
+                enemy.hurt(500);
                 active = false;
             }
             active = false;

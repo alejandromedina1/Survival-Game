@@ -18,9 +18,16 @@ let imgRPB;
 let imgFPR;
 let imgLPR;
 let imgRPR;
-let imgZombie;
 let imgMedKit;
 let imgRifle;
+
+//Zombies
+let imgZombie1;
+let imgZombie2;
+let imgZombie3;
+let imgZombie4;
+let imgZombie5;
+
 //Map images
 let imgCity;
 let imgShip;
@@ -60,8 +67,12 @@ function setup() {
   imgLPR = loadImage("NL_Rifle.png");
   imgRPR = loadImage("NR_Rifle.png");
 
-  //Zombie
-  imgZombie = loadImage("ZombieAlas.png");
+  //Zombies
+  imgZombie1 = loadImage("ZombieAlas.png");
+  imgZombie2 = loadImage("ZombieAlas2.png");
+  imgZombie3 = loadImage("ZombieAlas3.png");
+  imgZombie4 = loadImage("ZombieAlas4.png");
+  imgZombie5 = loadImage("ZombieAlas5.png");
 
   //MedKit
   imgMedKit = loadImage("Botiquín.png");
@@ -102,10 +113,43 @@ function setup() {
 
   player = new Player(21, 7, imgFP, imgBP, imgRP, imgLP);
 
-  for (let i = 0; i < 4; i++) {
-    horde.push(new Enemy(0, 0, imgZombie));
-    horde.push(new Enemy(0, 7, imgZombie));
-    horde.push(new Enemy(0, 14, imgZombie));
+  if (screen = 2) {
+    horde.push(new Enemy(0, 0, imgZombie1));
+    horde.push(new Enemy(0, 7, imgZombie1));
+    horde.push(new Enemy(0, 14, imgZombie1));
+  }
+  if (screen = 4) {
+    horde.push(new Enemy(0, 3, imgZombie1));
+    horde.push(new Enemy(0, 7, imgZombie1));
+    horde.push(new Enemy(12, 14, imgZombie1));
+    horde.push(new Enemy(23, 14, imgZombie1));
+  }
+  if (screen = 6) {
+    horde.push(new Enemy(23, 3, imgZombie2));
+    horde.push(new Enemy(23, 7, imgZombie2));
+    horde.push(new Enemy(12, 14, imgZombie2));
+    horde.push(new Enemy(0, 14, imgZombie2));
+  }
+  if (screen = 8) {
+    horde.push(new Enemy(12, 0, imgZombie3));
+    horde.push(new Enemy(24, 0, imgZombie3));
+    horde.push(new Enemy(24, 7, imgZombie3));
+    horde.push(new Enemy(24, 14, imgZombie3));
+    horde.push(new Enemy(12, 14, imgZombie3));
+    horde.push(new Enemy(12, 7, imgZombie3));
+  }
+  if (screen = 10) {
+    horde.push(new Enemy(12, 0, imgZombie4));
+    horde.push(new Enemy(24, 0, imgZombie4));
+    horde.push(new Enemy(24, 7, imgZombie4));
+    horde.push(new Enemy(24, 14, imgZombie4));
+    horde.push(new Enemy(12, 14, imgZombie4));
+    horde.push(new Enemy(12, 9, imgZombie4));
+    horde.push(new Enemy(12, 5, imgZombie4));
+  }
+  if (screen = 12) {
+    horde.push(new Enemy(12, 0, imgZombie5));
+    horde.push(new Enemy(24, 0, imgZombie5));
   }
 }
 
