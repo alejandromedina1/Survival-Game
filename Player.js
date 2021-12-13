@@ -154,6 +154,21 @@ class Player {
     getY() {
         return this.y;
     }
+    getY() {
+        return this.y;
+    }
+    getRow() {
+        return this.row;
+    }
+    getColumn() {
+        return this.column;
+    }
+    setRow(nRow){
+        this.row = nRow;
+    }
+    setColumn(nColumn){
+        this.column = nColumn;
+    }
     getInventory() {
         return this.inventory;
     }

@@ -4,7 +4,7 @@ let horde = [];
 let player;
 let clue;
 
-//Pista del nivel 1 ( cofre del tesoro)
+//Level 1 clue (treasure)
 let hint;
 
 //Imagenes
@@ -21,7 +21,7 @@ let imgRPR;
 let imgZombie;
 let imgMedKit;
 let imgRifle;
-//Imagenes mapas
+//Map images
 let imgCity;
 let imgShip;
 let imgForest;
@@ -29,7 +29,7 @@ let imgRoad;
 let imgGraveyard;
 let imgBeach;
 
-//Pistas
+//Clues
 let imgHint1;
 let imgHint2;
 let imgHint3;
@@ -44,7 +44,7 @@ function setup() {
   imgLP = loadImage("NL.png");
   imgRP = loadImage("NR.png");
 
-  //Bolillo player images
+  //Club player images
   imgFPB = loadImage("NF_Bolillo de frente.png");
   imgLPB = loadImage("NL_Bolillo de lado.png");
   imgRPB = loadImage("NR_Bolillo de lado.png");
@@ -57,13 +57,13 @@ function setup() {
   //Zombie
   imgZombie = loadImage("ZombieAlas.png");
 
-  //Med kit
+  //MedKit
   imgMedKit = loadImage("Botiquín.png");
 
   //Rifle
   imgRifle = loadImage("AK-47.png");
 
-  //Mapas
+  //Maps
   imgCity = loadImage("Mapaciudad.png");
   imgShip = loadImage("Barco.png");
   imgForest = loadImage("Bosque.png");
@@ -71,7 +71,7 @@ function setup() {
   imgGraveyard = loadImage("Cementerio.png");
   imgBeach = loadImage("Playa.png");
 
-  //Pistas
+  //Clues
   imgHint1 = loadImage("Pista 1.png");
   imgHint2 = loadImage("Pista 2.png");
   imgHint3 = loadImage("Pista 3.png");
@@ -82,14 +82,13 @@ function setup() {
 
   hint = loadImage("Clue.png");
   clue1 = new Clue(590, 430);
-  clue2 = new Clue();
-  clue3 = new Clue();
-  clue4 = new Clue();
-  clue5 = new Clue();
+  clue2 = new Clue(290, 530);
+  clue3 = new Clue(130, 594);
+  clue4 = new Clue(641, 323);
+  clue5 = new Clue(720, 434);
 
-  let xP = 21;
-  let yP = 7;
-  player = new Player(xP, yP, imgFP, imgBP, imgRP, imgLP);
+
+  player = new Player(21, 7, imgFP, imgBP, imgRP, imgLP);
 
   for (let i = 0; i < 4; i++) {
     horde.push(new Enemy(0, 0, imgZombie));
@@ -134,16 +133,18 @@ function draw() {
       map.ground(1);
       map.show();
       image(imgBeach, 600, 350, 1200, 700);
-      xP = 21;
-      yP = 4;
       player.show();
+      player.setColumn(20);
+      player.setRow(6);
       if (player.changeLevel(map.getLevel()) === true) {
         map.ground(2);
-        screen = 6;
+        screen = 5;
       }
       break;
     case 5: // Pista 2
-
+      image(imgHint2, 600, 350);
+      clue2.selected();
+      clue2.show();
       break;
     case 6: // Nivel 3
       map.ground(2);
@@ -152,11 +153,13 @@ function draw() {
       player.show();
       if (player.changeLevel(map.getLevel()) === true) {
         map.ground(3);
-        screen = 8;
+        screen = 7;
       }
       break;
     case 7: // Pista 3
-
+      image(imgHint3, 600, 350);
+      clue3.selected();
+      clue3.show();
       break;
     case 8: // Nivel 4
       map.ground(3);
@@ -165,11 +168,13 @@ function draw() {
       player.show();
       if (player.changeLevel(map.getLevel()) === true) {
         map.ground(4);
-        screen = 10;
+        screen = 9;
       }
       break;
     case 9: // Pista 4
-
+      image(imgHint4, 600, 350);
+      clue4.selected();
+      clue4.show();
       break;
     case 10: // Nivel 5
       map.ground(4);
@@ -178,11 +183,13 @@ function draw() {
       player.show();
       if (player.changeLevel(map.getLevel()) === true) {
         map.ground(5);
-        screen = 12;
+        screen = 11;
       }
       break;
     case 11: // Pista 5
-
+      image(imgHint5, 600, 350);
+      clue5.selected();
+      clue5.show();
       break;
     case 12: // Nivel 6
       map.ground(5);
@@ -251,5 +258,17 @@ function mousePressed() {
   player.shoot();
   if (clue1.selected()) {
     screen = 4;
+  }
+  if (clue2.selected()) {
+    screen = 6;
+  }
+  if (clue3.selected()) {
+    screen = 8;
+  }
+  if (clue4.selected()) {
+    screen = 10;
+  }
+  if (clue5.selected()) {
+    screen = 12;
   }
 }
