@@ -456,7 +456,7 @@ function mousePressed() {
     }
   } 
   if (screen === 1) {
-    if (579 < mouseX && mouseX < 877 && 535 < mouseY && mouseY < 620) {
+    if (818 < mouseX && mouseX < 1116 && 535 < mouseY && mouseY < 620) {
       screen = 2;
     }
   }
