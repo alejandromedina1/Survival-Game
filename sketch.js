@@ -39,6 +39,8 @@ let imgHint5;
 // Menús
 let mainMenu;
 let instructionMenu;
+let victoryMenu;
+let gameOverMenu;
 
 function setup() {
   createCanvas(1200, 700);
@@ -83,7 +85,10 @@ function setup() {
   imgHint5 = loadImage("Pista 5.png");
 
   //Menus
-  mainMenu = loadImage()
+  mainMenu = loadImage("Portada.png");
+  instructionMenu = loadImage("Instrucciones.png");
+  victoryMenu = loadImage("Victory.jpg");
+  gameOverMenu = loadImage("Game Over.jpg");
 
   map = new Map(12, 7, 8, 8);
 
@@ -99,8 +104,8 @@ function setup() {
 
   for (let i = 0; i < 4; i++) {
     horde.push(new Enemy(0, 0, imgZombie));
-    horde.push(new Enemy(1, 7, imgZombie));
-    horde.push(new Enemy(1, 14, imgZombie));
+    horde.push(new Enemy(0, 7, imgZombie));
+    horde.push(new Enemy(0, 14, imgZombie));
   }
 }
 
@@ -108,15 +113,19 @@ function draw() {
   background(220);
   switch (screen) {
     case 0: // Pantalla inicial
-
+      image(mainMenu, 600, 350, 1200, 700);
       break;
     case 1: // Instrucciones
-
+      image(instructionMenu, 600, 350, 1200, 700);
       break;
     case 2: // Nivel 1
       map.ground(0);
       map.show();
       image(imgShip, 600, 350, 1200, 700);
+      player.updateCoords();
+      for (let i = 0; i < horde.length; i++) {
+        horde[i].updateCoords();
+      }
       map.showObj();
       player.show();
       horde.forEach(enemy => {
@@ -217,18 +226,21 @@ function draw() {
       player.show();
       break;
     case 13: // Game Over
-
+      image(gameOverMenu, 600, 350, 1200, 700);
       break;
     case 14: // Victory
-
+      image(victoryMenu, 600, 350, 1200, 700);
       break;
     default:
       screen = 2;
       break;
   }
-  player.hitBox(horde);
+  player.hitBox(horde, screen);
   for (let i = 0; i < horde.length; i++) {
     player.closeAttack(horde[i]);
+  }
+  if (player.getHealth() < 0) {
+    screen = 13;
   }
   takeWeapon();
   takeAid();
@@ -259,7 +271,7 @@ function takeAid() {
   for (let i = 0; i < map.length; i++) {
     if (dist(map.getAid().getX(), map.getAid().getY(), player.getX(), player.getY()) < 50) {
       map.freeAid();
-      player.setHealth();
+      player.setHealth(player.getHealth() + 100);
     }
   }
 }
@@ -289,5 +301,35 @@ function mousePressed() {
   }
   if (clue5.selected()) {
     screen = 12;
+  }
+  if (screen === 13) {
+    if (400 < mouseX && mouseX < 800 && 400 < mouseY && mouseY < 500) {
+      for (let i = 0; i < horde.length; i++) {
+        screen = 2;
+        horde[i].setColumn(0);
+        horde[0].setRow(1);
+        horde[1].setRow(7);
+        horde[2].setRow(14);
+        horde[i].setHealth(250);
+      }
+      player.setHealth(100);
+      player.setColumn(21);
+      player.setRow(7);
+    }
+  }
+  if (screen === 14) {
+    if (200 < mouseX && mouseX < 600 && 350 < mouseY && mouseY < 450) {
+      screen = 2;
+      player.setHealth(100);
+      player.setColumn(21);
+      player.setRow(7);
+      for (let i = 0; i < horde.length; i++) {
+        horde[i].setColumn(0);
+        horde[0].setRow(1);
+        horde[1].setRow(7);
+        horde[2].setRow(14);
+        horde[i].setHealth(250);
+      }
+    }
   }
 }

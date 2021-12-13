@@ -67,7 +67,7 @@ class Player {
         if (key === 'q' || key === 'Q') {
             active = true
             if (active === true && dist(this.x, this.y, enemy.getX(), enemy.getY()) < 75) {
-                enemy.hurt(125);
+                enemy.hurt(50);
                 active = false;
             }
             active = false;
@@ -143,12 +143,10 @@ class Player {
     hitBox(enemy) {
         for (let i = 0; i < enemy.length; i++) {
             if (dist(this.x, this.y, enemy[i].getX(), enemy[i].getY()) < 25) {
-                this.hurt(1);
-                if (this.health <= 0) {
-                    console.log("GAME OVER");
+                if (frameCount % 60 === 0) {
+                    this.hurt(5);   
                 }
             }
-
         }
     }
     getY() {
@@ -184,7 +182,7 @@ class Player {
     getHealth() {
         return this.health;
     }
-    setHealth() {
-        this.health = this.health + 50;
+    setHealth(nHealth) {
+        this.health = nHealth;
     }
 }

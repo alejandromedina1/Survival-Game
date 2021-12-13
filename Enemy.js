@@ -44,7 +44,7 @@ class Enemy {
             if (rifleReference !== null) {
                 let bullets = rifleReference.getAmmo();
                 bullets.forEach(bullet => {
-                    if (bullet.getActive() && dist(this.x, this.y, bullet.getX(), bullet.getY()) <= 30) {
+                    if (bullet.getActive() && dist(this.x, this.y, bullet.getX(), bullet.getY()) <= 35) {
                         this.hurt(10);
                     }
                 });
@@ -62,8 +62,17 @@ class Enemy {
     getY() {
         return this.y;
     }
+    setRow(nRow){
+        this.row = nRow;
+    }
+    setColumn(nColumn){
+        this.column = nColumn;
+    }
 
     getHealth() {
         return this.health;
+    }
+    setHealth(nHealth){
+        this.health = nHealth
     }
 }
